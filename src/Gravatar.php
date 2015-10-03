@@ -146,9 +146,9 @@ class Gravatar implements GravatarInterface
             return $this;
         }
 
-        $this->resetParamsCache();
+        $this->cachedParams = null;
 
-        if ($this->isSupportedDefault($image)) {
+        if (in_array(strtolower($image), $this->supportedImages)) {
             $image = strtolower($image);
         }
         else {
@@ -183,7 +183,7 @@ class Gravatar implements GravatarInterface
      */
     public function setSize($size)
     {
-        $this->resetParamsCache();
+        $this->cachedParams = null;
         $this->checkSize($size);
 
         $this->size = $size;
@@ -212,7 +212,7 @@ class Gravatar implements GravatarInterface
      */
     public function setRating($rating)
     {
-        $this->resetParamsCache();
+        $this->cachedParams = null;
         $this->checkRating($rating);
 
         $this->rating = $rating;
@@ -354,18 +354,6 @@ class Gravatar implements GravatarInterface
      | ------------------------------------------------------------------------------------------------
      */
     /**
-     * Check image if it's in recognized gravatar "defaults",
-     *
-     * @param  string  $image
-     *
-     * @return bool
-     */
-    private function isSupportedDefault($image)
-    {
-        return in_array(strtolower($image), $this->supportedImages);
-    }
-
-    /**
      * Check the avatar size.
      *
      * @param  int  $size
@@ -392,15 +380,13 @@ class Gravatar implements GravatarInterface
      */
     private function checkSizeType(&$size)
     {
-        if (is_int($size) || ctype_digit($size)) {
-            $size = (int) $size;
-
-            return;
+        if ( ! is_int($size) && ! ctype_digit($size)) {
+            throw new InvalidImageSizeException(
+                'Avatar size specified must be an integer.'
+            );
         }
 
-        throw new InvalidImageSizeException(
-            'Avatar size specified must be an integer.'
-        );
+        $size = (int) $size;
     }
 
     /**
@@ -437,16 +423,6 @@ class Gravatar implements GravatarInterface
         }
     }
 
-    /**
-     * Check if default image is set.
-     *
-     * @return bool
-     */
-    private function hasDefaultImage()
-    {
-        return $this->getDefaultImage() !== false;
-    }
-
     /* ------------------------------------------------------------------------------------------------
      |  Other Functions
      | ------------------------------------------------------------------------------------------------
@@ -466,14 +442,6 @@ class Gravatar implements GravatarInterface
         }
 
         return $hash ? $this->hashEmail($email) : $email;
-    }
-
-    /**
-     * Wipe out the params cache.
-     */
-    private function resetParamsCache()
-    {
-        $this->cachedParams = null;
     }
 
     /**
@@ -527,7 +495,7 @@ class Gravatar implements GravatarInterface
         $params[] = 's=' . $this->getSize();
         $params[] = 'r=' . $this->getRating();
 
-        if ($this->hasDefaultImage()) {
+        if ($this->getDefaultImage() !== false) {
             $params[] = 'd=' . $this->getDefaultImage();
         }
 
