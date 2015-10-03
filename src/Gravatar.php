@@ -151,21 +151,17 @@ class Gravatar implements GravatarInterface
      */
     public function setDefaultImage($image)
     {
-        if ($image === false) {
-            $this->defaultImage = $image;
+        if ($image !== false) {
+            $this->resetParamsCache();
 
-            return $this;
-        }
+            if ($this->isSupportedDefault($image)) {
+                $image = strtolower($image);
+            }
+            else {
+                $this->checkImageUrl($image);
 
-        $this->resetParamsCache();
-
-        if ($this->isSupportedDefault($image)) {
-            $image = strtolower($image);
-        }
-        else {
-            $this->checkImageUrl($image);
-
-            $image = rawurlencode($image);
+                $image = rawurlencode($image);
+            }
         }
 
         $this->defaultImage = $image;
@@ -195,7 +191,6 @@ class Gravatar implements GravatarInterface
     public function setSize($size)
     {
         $this->resetParamsCache();
-
         $this->checkSize($size);
 
         $this->size = $size;
@@ -273,7 +268,7 @@ class Gravatar implements GravatarInterface
     }
 
     /**
-     * This is just to make it easier to use as a twig asset.
+     * Get the avatar URL based on the provided email address.
      *
      * @param  string  $email
      * @param  bool    $hash
@@ -281,19 +276,6 @@ class Gravatar implements GravatarInterface
      * @return string
      */
     public function get($email, $hash = true)
-    {
-        return $this->buildURL($email, $hash);
-    }
-
-    /**
-     * Build the avatar URL based on the provided email address.
-     *
-     * @param  string  $email
-     * @param  bool    $hash
-     *
-     * @return string
-     */
-    public function buildURL($email, $hash = true)
     {
         $url = $this->getUrl() . '/' . $this->getEmail($email, $hash);
 
