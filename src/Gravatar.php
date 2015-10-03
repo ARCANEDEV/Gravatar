@@ -153,8 +153,6 @@ class Gravatar implements GravatarInterface
         }
         else {
             $this->checkImageUrl($image);
-
-            $image = rawurlencode($image);
         }
 
         $this->defaultImage = $image;
@@ -273,7 +271,18 @@ class Gravatar implements GravatarInterface
         $url  = $this->isSecured() ? static::SECURE_URL : static::BASE_URL;
         $url .= $this->getEmail($email, $hash);
 
-        $this->prepareCachedParams();
+        if (is_null($this->cachedParams)) {
+            $params   = [
+                's' => $this->getSize(),
+                'r' => $this->getRating()
+            ];
+
+            if ($this->getDefaultImage() !== false) {
+                $params['d'] = $this->getDefaultImage();
+            }
+
+            $this->cachedParams = '?' . http_build_query($params);
+        }
 
         return $url . $this->cachedParams . $this->getForceDefault($email);
     }
@@ -480,25 +489,5 @@ class Gravatar implements GravatarInterface
         }
 
         return ! empty($this->cachedParams) ? '&f=y' : '?f=y';
-    }
-
-    /**
-     * Check cached params.
-     */
-    private function prepareCachedParams()
-    {
-        if ( ! is_null($this->cachedParams)) {
-            return;
-        }
-
-        $params   = [];
-        $params[] = 's=' . $this->getSize();
-        $params[] = 'r=' . $this->getRating();
-
-        if ($this->getDefaultImage() !== false) {
-            $params[] = 'd=' . $this->getDefaultImage();
-        }
-
-        $this->cachedParams = '?' . implode('&', $params);
     }
 }
