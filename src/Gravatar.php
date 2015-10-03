@@ -268,23 +268,12 @@ class Gravatar implements GravatarInterface
      */
     public function get($email, $hash = true)
     {
-        $url  = $this->isSecured() ? static::SECURE_URL : static::BASE_URL;
-        $url .= $this->getEmail($email, $hash);
+        $url    = $this->isSecured() ? static::SECURE_URL : static::BASE_URL;
+        $url   .= $this->getEmail($email, $hash);
 
-        if (is_null($this->cachedParams)) {
-            $params   = [
-                's' => $this->getSize(),
-                'r' => $this->getRating()
-            ];
+        $params = $this->getParams($email);
 
-            if ($this->getDefaultImage() !== false) {
-                $params['d'] = $this->getDefaultImage();
-            }
-
-            $this->cachedParams = '?' . http_build_query($params);
-        }
-
-        return $url . $this->cachedParams . $this->getForceDefault($email);
+        return $url . '?' . http_build_query($params);
     }
 
     /**
@@ -299,9 +288,8 @@ class Gravatar implements GravatarInterface
      */
     public function image($email, $alt = null, $attributes = [], $rating = null)
     {
-        $dimensions = $this->getDimensions($attributes);
-
-        $src = $this->src($email, $dimensions, $rating);
+        $size = get_max_dimension($attributes, $this->defaultSize);
+        $src  = $this->src($email, $size, $rating);
 
         return HtmlBuilder::image($src, $alt, $attributes);
     }
@@ -437,6 +425,35 @@ class Gravatar implements GravatarInterface
      | ------------------------------------------------------------------------------------------------
      */
     /**
+     * Get params.
+     *
+     * @param  string  $email
+     *
+     * @return array
+     */
+    private function getParams($email)
+    {
+        $params = $this->cachedParams;
+
+        if (is_null($this->cachedParams)) {
+            $params['s'] = $this->getSize();
+            $params['r'] = $this->getRating();
+
+            if ($this->getDefaultImage() !== false) {
+                $params['d'] = $this->getDefaultImage();
+            }
+
+            $this->cachedParams = $params;
+        }
+
+        if (empty($email)) {
+            $params['f'] = 'y';
+        }
+
+        return (array) $params;
+    }
+
+    /**
      * Get email for gravatar url.
      *
      * @param  string  $email
@@ -451,43 +468,5 @@ class Gravatar implements GravatarInterface
         }
 
         return $hash ? $this->hashEmail($email) : $email;
-    }
-
-    /**
-     * Get dimensions from attributes.
-     *
-     * @param  array  $attributes
-     *
-     * @return int|null
-     */
-    private function getDimensions(array $attributes)
-    {
-        $dimensions = [];
-
-        if (array_key_exists('width', $attributes)) {
-            $dimensions[] = $attributes['width'];
-        }
-
-        if (array_key_exists('height', $attributes)) {
-            $dimensions[] = $attributes['height'];
-        }
-
-        return count($dimensions) ? min(512, max($dimensions)) : $this->defaultSize;
-    }
-
-    /**
-     * Get force default tail.
-     *
-     * @param  string  $email
-     *
-     * @return string
-     */
-    private function getForceDefault($email)
-    {
-        if ( ! empty($email)) {
-            return '';
-        }
-
-        return ! empty($this->cachedParams) ? '&f=y' : '?f=y';
     }
 }
