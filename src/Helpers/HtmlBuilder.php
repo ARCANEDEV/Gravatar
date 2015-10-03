@@ -34,7 +34,7 @@ class HtmlBuilder
         // as this will convert HTML attributes such as "required" to a correct
         // form like required="required" instead of using incorrect numerics.
         foreach ((array) $attributes as $key => $value) {
-            $html[] = static::attributeElement($key, $value);
+            $html[] = self::attributeElement($key, $value);
         }
 
         $html = array_filter($html);
