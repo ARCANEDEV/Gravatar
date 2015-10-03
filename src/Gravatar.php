@@ -5,7 +5,6 @@ use Arcanedev\Gravatar\Exceptions\InvalidImageRatingException;
 use Arcanedev\Gravatar\Exceptions\InvalidImageSizeException;
 use Arcanedev\Gravatar\Exceptions\InvalidImageUrlException;
 use Arcanedev\Gravatar\Helpers\HtmlBuilder;
-use InvalidArgumentException;
 
 /**
  * Class     Gravatar
@@ -19,8 +18,8 @@ class Gravatar implements GravatarInterface
      |  Constants
      | ------------------------------------------------------------------------------------------------
      */
-    const BASE_URL   = 'http://www.gravatar.com/avatar';
-    const SECURE_URL = 'https://secure.gravatar.com/avatar';
+    const BASE_URL   = 'http://www.gravatar.com/avatar/';
+    const SECURE_URL = 'https://secure.gravatar.com/avatar/';
 
     /* ------------------------------------------------------------------------------------------------
      |  Properties
@@ -121,16 +120,6 @@ class Gravatar implements GravatarInterface
      | ------------------------------------------------------------------------------------------------
      */
     /**
-     * Get the gravatar URL.
-     *
-     * @return string
-     */
-    private function getUrl()
-    {
-        return $this->isSecured() ? static::SECURE_URL : static::BASE_URL;
-    }
-
-    /**
      * Get the current default image setting.
      *
      * @return string|false
@@ -147,21 +136,25 @@ class Gravatar implements GravatarInterface
      *
      * @return self
      *
-     * @throws \InvalidArgumentException
+     * @throws \Arcanedev\Gravatar\Exceptions\InvalidImageUrlException
      */
     public function setDefaultImage($image)
     {
-        if ($image !== false) {
-            $this->resetParamsCache();
+        if ($image === false) {
+            $this->defaultImage = $image;
 
-            if ($this->isSupportedDefault($image)) {
-                $image = strtolower($image);
-            }
-            else {
-                $this->checkImageUrl($image);
+            return $this;
+        }
 
-                $image = rawurlencode($image);
-            }
+        $this->resetParamsCache();
+
+        if ($this->isSupportedDefault($image)) {
+            $image = strtolower($image);
+        }
+        else {
+            $this->checkImageUrl($image);
+
+            $image = rawurlencode($image);
         }
 
         $this->defaultImage = $image;
@@ -277,7 +270,8 @@ class Gravatar implements GravatarInterface
      */
     public function get($email, $hash = true)
     {
-        $url = $this->getUrl() . '/' . $this->getEmail($email, $hash);
+        $url  = $this->isSecured() ? static::SECURE_URL : static::BASE_URL;
+        $url .= $this->getEmail($email, $hash);
 
         $this->prepareCachedParams();
 
@@ -301,28 +295,6 @@ class Gravatar implements GravatarInterface
         $src = $this->src($email, $dimensions, $rating);
 
         return HtmlBuilder::image($src, $alt, $attributes);
-    }
-
-    /**
-     * Get dimensions from attributes.
-     *
-     * @param  array  $attributes
-     *
-     * @return int|null
-     */
-    private function getDimensions(array $attributes)
-    {
-        $dimensions = [];
-
-        if (array_key_exists('width', $attributes)) {
-            $dimensions[] = $attributes['width'];
-        }
-
-        if (array_key_exists('height', $attributes)) {
-            $dimensions[] = $attributes['height'];
-        }
-
-        return count($dimensions) ? min(512, max($dimensions)) : $this->defaultSize;
     }
 
     /**
@@ -363,6 +335,18 @@ class Gravatar implements GravatarInterface
         $headers = get_headers($this->get($email), 1);
 
         return strpos($headers[0], '200') ? true : false;
+    }
+
+    /**
+     * Get a hashed email.
+     *
+     * @param  string  $email
+     *
+     * @return string
+     */
+    public function hashEmail($email)
+    {
+        return hash('md5', strtolower(trim($email)));
     }
 
     /* ------------------------------------------------------------------------------------------------
@@ -428,13 +412,11 @@ class Gravatar implements GravatarInterface
      */
     private function checkImageUrl($image)
     {
-        if (filter_var($image, FILTER_VALIDATE_URL)) {
-            return;
+        if ( ! filter_var($image, FILTER_VALIDATE_URL)) {
+            throw new InvalidImageUrlException(
+                'The default image specified is not a recognized gravatar "default" and is not a valid URL'
+            );
         }
-
-        throw new InvalidImageUrlException(
-            'The default image specified is not a recognized gravatar "default" and is not a valid URL'
-        );
     }
 
     /**
@@ -448,13 +430,11 @@ class Gravatar implements GravatarInterface
     {
         $rating = strtolower($rating);
 
-        if (in_array($rating, $this->supportedRatings)) {
-            return;
+        if ( ! in_array($rating, $this->supportedRatings)) {
+            throw new InvalidImageRatingException(
+                "Invalid rating '$rating' specified, only 'g', 'pg', 'r' or 'x' are supported."
+            );
         }
-
-        throw new InvalidImageRatingException(
-            "Invalid rating '$rating' specified, only 'g', 'pg', 'r' or 'x' are supported."
-        );
     }
 
     /**
@@ -471,18 +451,6 @@ class Gravatar implements GravatarInterface
      |  Other Functions
      | ------------------------------------------------------------------------------------------------
      */
-    /**
-     * Get a hashed email.
-     *
-     * @param  string  $email
-     *
-     * @return string
-     */
-    public function hashEmail($email)
-    {
-        return hash('md5', strtolower(trim($email)));
-    }
-
     /**
      * Get email for gravatar url.
      *
@@ -506,6 +474,28 @@ class Gravatar implements GravatarInterface
     private function resetParamsCache()
     {
         $this->cachedParams = null;
+    }
+
+    /**
+     * Get dimensions from attributes.
+     *
+     * @param  array  $attributes
+     *
+     * @return int|null
+     */
+    private function getDimensions(array $attributes)
+    {
+        $dimensions = [];
+
+        if (array_key_exists('width', $attributes)) {
+            $dimensions[] = $attributes['width'];
+        }
+
+        if (array_key_exists('height', $attributes)) {
+            $dimensions[] = $attributes['height'];
+        }
+
+        return count($dimensions) ? min(512, max($dimensions)) : $this->defaultSize;
     }
 
     /**
