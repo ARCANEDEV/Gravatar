@@ -4,6 +4,7 @@ use Arcanedev\Gravatar\Contracts\GravatarInterface;
 use Arcanedev\Gravatar\Exceptions\InvalidImageRatingException;
 use Arcanedev\Gravatar\Exceptions\InvalidImageSizeException;
 use Arcanedev\Gravatar\Exceptions\InvalidImageUrlException;
+use Arcanedev\Gravatar\Helpers\HtmlBuilder;
 use InvalidArgumentException;
 
 /**
@@ -268,7 +269,7 @@ class Gravatar implements GravatarInterface
             $this->setRating($rating);
         }
 
-        return htmlentities($this->get($email));
+        return $this->get($email); // htmlentities($this->get($email));
     }
 
     /**
@@ -282,6 +283,23 @@ class Gravatar implements GravatarInterface
     public function get($email, $hash = true)
     {
         return $this->buildURL($email, $hash);
+    }
+
+    /**
+     * Build the avatar URL based on the provided email address.
+     *
+     * @param  string  $email
+     * @param  bool    $hash
+     *
+     * @return string
+     */
+    public function buildURL($email, $hash = true)
+    {
+        $url = $this->getUrl() . '/' . $this->getEmail($email, $hash);
+
+        $this->prepareCachedParams();
+
+        return $url . $this->cachedParams . $this->getForceDefault($email);
     }
 
     /**
@@ -300,9 +318,7 @@ class Gravatar implements GravatarInterface
 
         $src = $this->src($email, $dimensions, $rating);
 
-        $this->checkAttributes($attributes);
-
-        return $this->formatImage($src, $alt, $attributes);
+        return HtmlBuilder::image($src, $alt, $attributes);
     }
 
     /**
@@ -392,19 +408,33 @@ class Gravatar implements GravatarInterface
      */
     private function checkSize(&$size)
     {
-        if ( ! is_int($size) && !ctype_digit($size)) {
-            throw new InvalidImageSizeException(
-                'Avatar size specified must be an integer.'
-            );
-        }
-
-        $size = (int) $size;
+        $this->checkSizeType($size);
 
         if ($size < 0 || $size > 512) {
             throw new InvalidImageSizeException(
                 'Avatar size must be within 0 pixels and 512 pixels.'
             );
         }
+    }
+
+    /**
+     * Check size type.
+     *
+     * @param  int  $size
+     *
+     * @throws \Arcanedev\Gravatar\Exceptions\InvalidImageSizeException
+     */
+    private function checkSizeType(&$size)
+    {
+        if (is_int($size) || ctype_digit($size)) {
+            $size = (int) $size;
+
+            return;
+        }
+
+        throw new InvalidImageSizeException(
+            'Avatar size specified must be an integer.'
+        );
     }
 
     /**
@@ -441,45 +471,24 @@ class Gravatar implements GravatarInterface
         }
 
         throw new InvalidImageRatingException(
-            'Invalid rating "' . $rating . '" specified, only "g", "pg", "r", or "x" are supported.'
+            "Invalid rating '$rating' specified, only 'g', 'pg', 'r' or 'x' are supported."
         );
+    }
+
+    /**
+     * Check if default image is set.
+     *
+     * @return bool
+     */
+    private function hasDefaultImage()
+    {
+        return $this->getDefaultImage() !== false;
     }
 
     /* ------------------------------------------------------------------------------------------------
      |  Other Functions
      | ------------------------------------------------------------------------------------------------
      */
-    /**
-     * Build the avatar URL based on the provided email address.
-     *
-     * @param  string  $email
-     * @param  bool    $hash
-     *
-     * @return string
-     */
-    public function buildURL($email, $hash = true)
-    {
-        $url = $this->getUrl() . '/' . $this->getEmail($email, $hash);
-
-        $this->prepareCachedParams();
-
-        return $url . $this->cachedParams . $this->getForceDefault($email);
-    }
-
-    /**
-     * Format image tag.
-     *
-     * @param  string  $src
-     * @param  string  $alt
-     * @param  array   $attributes
-     *
-     * @return string
-     */
-    private function formatImage($src, $alt, array $attributes)
-    {
-        return '<img src="' . $src . '" alt="' . $alt . '" height="' . $attributes['height'] . '" width="' . $attributes['width'] . '">';
-    }
-
     /**
      * Get a hashed email.
      *
@@ -534,22 +543,6 @@ class Gravatar implements GravatarInterface
     }
 
     /**
-     * Check size attributes.
-     *
-     * @param  array  $attributes
-     */
-    private function checkAttributes(&$attributes)
-    {
-        if (
-            ! array_key_exists('width', $attributes) &&
-            ! array_key_exists('height', $attributes)
-        ) {
-            $attributes['width']  = $this->size;
-            $attributes['height'] = $this->size;
-        }
-    }
-
-    /**
      * Check cached params.
      */
     private function prepareCachedParams()
@@ -562,7 +555,7 @@ class Gravatar implements GravatarInterface
         $params[] = 's=' . $this->getSize();
         $params[] = 'r=' . $this->getRating();
 
-        if ($this->getDefaultImage() !== false) {
+        if ($this->hasDefaultImage()) {
             $params[] = 'd=' . $this->getDefaultImage();
         }
 

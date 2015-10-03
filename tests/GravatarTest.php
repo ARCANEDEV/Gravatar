@@ -83,6 +83,46 @@ class GravatarTest extends TestCase
         $this->gravatar->setSize(513);
     }
 
+    /**
+     * @test
+     *
+     * @expectedException        \Arcanedev\Gravatar\Exceptions\InvalidImageRatingException
+     * @expectedExceptionMessage Invalid rating 'mature' specified, only 'g', 'pg', 'r' or 'x' are supported.
+     */
+    public function it_must_throw_an_invalid_rating_exception()
+    {
+        $this->gravatar->setRating('mature');
+    }
+
+    /**
+     * @test
+     *
+     * @expectedException        \Arcanedev\Gravatar\Exceptions\InvalidImageUrlException
+     * @expectedExceptionMessage The default image specified is not a recognized gravatar "default" and is not a valid URL
+     */
+    public function it_must_throw_invalid_image_url_on_setting_default_image()
+    {
+        new Gravatar('hello.com/img.png');
+    }
+
+    /** @test */
+    public function it_can_setand_get_default_image_url()
+    {
+        $this->gravatar = new Gravatar('http://www.hello.com/img.png');
+
+        $this->assertEquals(
+            "https://secure.gravatar.com/avatar/00000000000000000000000000000000?s=80&r=g&d=http%3A%2F%2Fwww.hello.com%2Fimg.png&f=y",
+            $this->gravatar->get('')
+        );
+
+        $hashed = md5($this->email);
+
+        $this->assertEquals(
+            "https://secure.gravatar.com/avatar/$hashed?s=80&r=g&d=http%3A%2F%2Fwww.hello.com%2Fimg.png",
+            $this->gravatar->get($this->email)
+        );
+    }
+
     /** @test */
     public function it_can_disable_and_enable_the_secure_url()
     {
@@ -118,10 +158,118 @@ class GravatarTest extends TestCase
     }
 
     /** @test */
+    public function it_can_get_gravatar_secure_url()
+    {
+        $pattern = '/^http(s?):\/\/secure.gravatar.com\/avatar\/[0-9a-z]{32}\?s=80&r=g&d=identicon$/';
+
+        $emails = [
+            $this->email,
+            'ARCANEDEV.Maroc@gmail.com',
+            '  ARCANEDEV.Maroc@gmail.com',
+            'ARCANEDEV.Maroc@gmail.com   ',
+            '  ARCANEDEV.Maroc@gmail.com   ',
+        ];
+
+        foreach($emails as $email) {
+            $url = $this->gravatar->get($email);
+
+            $this->assertEquals(1, preg_match($pattern, $url));
+        }
+    }
+
+    /** @test */
+    public function it_can_get_gravatar_url_on_empty_email()
+    {
+        $expected = 'https://secure.gravatar.com/avatar/00000000000000000000000000000000?s=80&r=g&d=identicon&f=y';
+
+        $this->assertEquals($expected, $this->gravatar->get(''));
+        $this->assertEquals($expected, $this->gravatar->get('', false));
+    }
+
+    /** @test */
+    public function it_can_get_gravatar_src_url()
+    {
+        $hashed = md5($this->email);
+
+        $this->assertEquals(
+            "https://secure.gravatar.com/avatar/$hashed?s=80&r=g&d=identicon",
+            $this->gravatar->src($this->email)
+        );
+
+        $size   = 128;
+
+        $this->assertEquals(
+            "https://secure.gravatar.com/avatar/$hashed?s=$size&r=g&d=identicon",
+            $this->gravatar->src($this->email, $size)
+        );
+
+        $rating = 'r';
+
+        $this->assertEquals(
+            "https://secure.gravatar.com/avatar/$hashed?s=$size&r=$rating&d=identicon",
+            $this->gravatar->src($this->email, $size, $rating)
+        );
+    }
+
+    /** @test */
+    public function it_can_get_gravatar_image_tag()
+    {
+        $hashed = md5($this->email);
+
+        $this->assertEquals(
+            "<img src=\"https://secure.gravatar.com/avatar/$hashed?s=80&r=g&d=identicon\">",
+            $this->gravatar->image($this->email)
+        );
+
+        $alt = 'ARCANEDEV';
+
+        $this->assertEquals(
+            "<img src=\"https://secure.gravatar.com/avatar/$hashed?s=80&r=g&d=identicon\" alt=\"$alt\">",
+            $this->gravatar->image($this->email, $alt)
+        );
+
+        $this->assertEquals(
+            "<img src=\"https://secure.gravatar.com/avatar/$hashed?s=80&r=g&d=identicon\" class=\"img-responsive\" alt=\"$alt\">",
+            $this->gravatar->image($this->email, $alt, ['class'  => 'img-responsive'])
+        );
+    }
+
+    /** @test */
     public function it_can_check_if_email_has_a_gravatar()
     {
         $this->assertTrue($this->gravatar->exists($this->email));
 
         $this->assertFalse($this->gravatar->exists('not-real@email.com'));
+    }
+
+    /** @test */
+    public function it_can_set_false_to_default_image()
+    {
+        $this->gravatar = new Gravatar(false);
+
+        $this->assertEquals(
+            'https://secure.gravatar.com/avatar/00000000000000000000000000000000?s=80&r=g&f=y',
+            $this->gravatar->get('')
+        );
+    }
+
+    /** @test */
+    public function it_can_set_size_from_height_or_width_attributes()
+    {
+        $this->gravatar->image('', null, ['width' => 32]);
+
+        $this->assertEquals(32, $this->gravatar->getSize());
+
+        $this->gravatar->image('', null, ['height' => 64]);
+
+        $this->assertEquals(64, $this->gravatar->getSize());
+
+        $this->gravatar->image('', null, ['width' => 64, 'height' => 128]);
+
+        $this->assertEquals(128, $this->gravatar->getSize());
+
+        $this->gravatar->image('', null, ['width' => 256, 'height' => 128]);
+
+        $this->assertEquals(256, $this->gravatar->getSize());
     }
 }
