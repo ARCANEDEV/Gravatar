@@ -495,8 +495,8 @@ class Gravatar implements GravatarInterface
     /**
      * Get email for gravatar url.
      *
-     * @param  string     $email
-     * @param  bool|true  $hash
+     * @param  string  $email
+     * @param  bool    $hash
      *
      * @return string
      */
@@ -536,7 +536,7 @@ class Gravatar implements GravatarInterface
     /**
      * Check size attributes.
      *
-     * @param  string  $attributes
+     * @param  array  $attributes
      */
     private function checkAttributes(&$attributes)
     {
@@ -562,7 +562,7 @@ class Gravatar implements GravatarInterface
         $params[] = 's=' . $this->getSize();
         $params[] = 'r=' . $this->getRating();
 
-        if ($this->getDefaultImage()) {
+        if ($this->getDefaultImage() !== false) {
             $params[] = 'd=' . $this->getDefaultImage();
         }
 
