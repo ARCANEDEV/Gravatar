@@ -1,7 +1,7 @@
 {
     "name": "arcanedev/gravatar",
     "description": "Gravatar Package for Laravel",
-    "keywords": ["laravel", "gravatar"],
+    "keywords": ["gravatar", "avatar", "identicon", "monsterid", "wavatar", "retro", "laravel"],
     "homepage": "https://github.com/ARCANEDEV/Gravatar",
     "license": "MIT",
     "authors": [
