@@ -140,19 +140,15 @@ class Gravatar implements GravatarInterface
      */
     public function setDefaultImage($image)
     {
-        if ($image === false) {
-            $this->defaultImage = $image;
+        if ($image !== false) {
+            $this->cachedParams = null;
 
-            return $this;
-        }
-
-        $this->cachedParams = null;
-
-        if (in_array(strtolower($image), $this->supportedImages)) {
-            $image = strtolower($image);
-        }
-        else {
-            $this->checkImageUrl($image);
+            if (in_array(strtolower($image), $this->supportedImages)) {
+                $image = strtolower($image);
+            }
+            else {
+                $this->checkImageUrl($image);
+            }
         }
 
         $this->defaultImage = $image;
@@ -211,7 +207,14 @@ class Gravatar implements GravatarInterface
     public function setRating($rating)
     {
         $this->cachedParams = null;
-        $this->checkRating($rating);
+
+        $rating = strtolower($rating);
+
+        if ( ! in_array($rating, $this->supportedRatings)) {
+            throw new InvalidImageRatingException(
+                "Invalid rating '$rating' specified, only 'g', 'pg', 'r' or 'x' are supported."
+            );
+        }
 
         $this->rating = $rating;
 
@@ -268,8 +271,10 @@ class Gravatar implements GravatarInterface
      */
     public function get($email, $hash = true)
     {
-        $url    = $this->isSecured() ? static::SECURE_URL : static::BASE_URL;
-        $url   .= $this->getEmail($email, $hash);
+        $url  = $this->isSecured() ? static::SECURE_URL : static::BASE_URL;
+        $url .= empty($email)
+            ? str_repeat('0', 32)
+            : ($hash ? $this->hashEmail($email) : $email);
 
         $params = $this->getParams($email);
 
@@ -409,24 +414,6 @@ class Gravatar implements GravatarInterface
         }
     }
 
-    /**
-     * Check the rating.
-     *
-     * @param  string  $rating
-     *
-     * @throws \Arcanedev\Gravatar\Exceptions\InvalidImageRatingException
-     */
-    private function checkRating(&$rating)
-    {
-        $rating = strtolower($rating);
-
-        if ( ! in_array($rating, $this->supportedRatings)) {
-            throw new InvalidImageRatingException(
-                "Invalid rating '$rating' specified, only 'g', 'pg', 'r' or 'x' are supported."
-            );
-        }
-    }
-
     /* ------------------------------------------------------------------------------------------------
      |  Other Functions
      | ------------------------------------------------------------------------------------------------
@@ -458,22 +445,5 @@ class Gravatar implements GravatarInterface
         }
 
         return (array) $params;
-    }
-
-    /**
-     * Get email for gravatar url.
-     *
-     * @param  string  $email
-     * @param  bool    $hash
-     *
-     * @return string
-     */
-    private function getEmail($email, $hash = true)
-    {
-        if (empty($email)) {
-            return str_repeat('0', 32);
-        }
-
-        return $hash ? $this->hashEmail($email) : $email;
     }
 }
