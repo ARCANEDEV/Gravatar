@@ -179,7 +179,7 @@ class Gravatar implements GravatarInterface
     {
         $this->cachedParams = null;
 
-        if ( ! is_int($size) && ! ctype_digit($size)) {
+        if ( ! is_val_integer($size)) {
             throw new InvalidImageSizeException(
                 'Avatar size specified must be an integer.'
             );
@@ -187,7 +187,7 @@ class Gravatar implements GravatarInterface
 
         $size = (int) $size;
 
-        if ($size < 0 || $size > 512) {
+        if (is_int_not_between($size, 0, 512)) {
             throw new InvalidImageSizeException(
                 'Avatar size must be within 0 pixels and 512 pixels.'
             );
