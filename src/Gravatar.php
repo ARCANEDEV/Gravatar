@@ -40,13 +40,6 @@ class Gravatar implements GravatarInterface
     protected $rating       = 'g';
 
     /**
-     * The avatar default size.
-     *
-     * @var int
-     */
-    private $defaultSize    = 80;
-
-    /**
      * The avatar size.
      *
      * @var int
@@ -103,15 +96,14 @@ class Gravatar implements GravatarInterface
      * Make a gravatar instance.
      *
      * @param  string  $default
-     * @param  int     $defaultSize
+     * @param  int     $size
      * @param  string  $rating
      */
-    public function __construct($default = 'mm', $defaultSize = 80, $rating = 'g')
+    public function __construct($default = 'mm', $size = 80, $rating = 'g')
     {
         $this->setDefaultImage($default);
-        $this->defaultSize = $defaultSize;
+        $this->setSize($size);
         $this->setRating($rating);
-
         $this->enableSecure();
     }
 
@@ -260,7 +252,7 @@ class Gravatar implements GravatarInterface
     public function src($email, $size = null, $rating = null)
     {
         if (is_null($size)) {
-            $size = $this->defaultSize;
+            $size = $this->getSize();
         }
 
         $size = max(1, min(512, $size));
@@ -312,7 +304,7 @@ class Gravatar implements GravatarInterface
 
         $size = count($dimensions)
             ? min(512, max($dimensions))
-            : $this->defaultSize;
+            : $this->getSize();
 
         $src  = $this->src($email, $size, $rating);
 
