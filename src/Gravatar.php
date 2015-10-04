@@ -178,7 +178,20 @@ class Gravatar implements GravatarInterface
     public function setSize($size)
     {
         $this->cachedParams = null;
-        $this->checkSize($size);
+
+        if ( ! is_int($size) && ! ctype_digit($size)) {
+            throw new InvalidImageSizeException(
+                'Avatar size specified must be an integer.'
+            );
+        }
+
+        $size = (int) $size;
+
+        if ($size < 0 || $size > 512) {
+            throw new InvalidImageSizeException(
+                'Avatar size must be within 0 pixels and 512 pixels.'
+            );
+        }
 
         $this->size = $size;
 
@@ -362,42 +375,6 @@ class Gravatar implements GravatarInterface
      |  Check Functions
      | ------------------------------------------------------------------------------------------------
      */
-    /**
-     * Check the avatar size.
-     *
-     * @param  int  $size
-     *
-     * @throws \Arcanedev\Gravatar\Exceptions\InvalidImageSizeException
-     */
-    private function checkSize(&$size)
-    {
-        $this->checkSizeType($size);
-
-        if ($size < 0 || $size > 512) {
-            throw new InvalidImageSizeException(
-                'Avatar size must be within 0 pixels and 512 pixels.'
-            );
-        }
-    }
-
-    /**
-     * Check size type.
-     *
-     * @param  int  $size
-     *
-     * @throws \Arcanedev\Gravatar\Exceptions\InvalidImageSizeException
-     */
-    private function checkSizeType(&$size)
-    {
-        if ( ! is_int($size) && ! ctype_digit($size)) {
-            throw new InvalidImageSizeException(
-                'Avatar size specified must be an integer.'
-            );
-        }
-
-        $size = (int) $size;
-    }
-
     /**
      * Check image url.
      *
