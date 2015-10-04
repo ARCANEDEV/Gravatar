@@ -55,7 +55,7 @@ else {
 
 And last but not least, if you want to echo out the image:
 
-```
+```php
 echo gravatar()->image('your@email.com');
 echo gravatar()->image('your@email.com', 'Username');
 echo gravatar()->image('your@email.com', 'Username', ['class' => 'img-responsive']);
