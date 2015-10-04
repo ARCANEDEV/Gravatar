@@ -8,7 +8,7 @@ Gravatar [![For PHP][badge_php]](https://github.com/ARCANEDEV/Gravatar) [![For L
 [![Packagist Downloads][badge_downloads]](https://packagist.org/packages/arcanedev/gravatar)
 
 [badge_php]:       https://img.shields.io/badge/PHP-Framework%20agnostic-4F5B93.svg?style=flat-square
-[badge_laravel]:   https://img.shields.io/badge/for%20Laravel-5.x-orange.svg?style=flat-square
+[badge_laravel]:   https://img.shields.io/badge/Laravel%20Supported-5.x-orange.svg?style=flat-square
 [badge_license]:   http://img.shields.io/packagist/l/arcanedev/gravatar.svg?style=flat-square
 [badge_build]:     http://img.shields.io/travis/ARCANEDEV/Gravatar.svg?style=flat-square
 [badge_coverage]:  https://img.shields.io/scrutinizer/coverage/g/ARCANEDEV/Gravatar.svg?style=flat-square
