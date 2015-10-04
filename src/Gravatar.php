@@ -288,7 +288,14 @@ class Gravatar implements GravatarInterface
      */
     public function image($email, $alt = null, $attributes = [], $rating = null)
     {
-        $size = get_max_dimension($attributes, $this->defaultSize);
+        $dimensions = array_values(
+            array_only($attributes, ['width', 'height'])
+        );
+
+        $size = count($dimensions)
+            ? min(512, max($dimensions))
+            : $this->defaultSize;
+
         $src  = $this->src($email, $size, $rating);
 
         return HtmlBuilder::image($src, $alt, $attributes);
