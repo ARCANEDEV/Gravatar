@@ -1,24 +1,26 @@
 {
-    "name": "arcanedev/gravatar",
+    "name":        "arcanedev/gravatar",
     "description": "Gravatar Package for Laravel",
-    "keywords": ["gravatar", "avatar", "identicon", "monsterid", "wavatar", "retro", "laravel"],
-    "homepage": "https://github.com/ARCANEDEV/Gravatar",
-    "license": "MIT",
+    "keywords":    ["arcanedev", "gravatar", "avatar", "identicon", "monsterid", "wavatar", "retro", "laravel"],
+    "homepage":    "https://github.com/ARCANEDEV/Gravatar",
     "authors": [
         {
-            "name": "ARCANEDEV",
-            "email": "arcanedev.maroc@gmail.com",
-            "homepage": "https://github.com/ARCANEDEV"
+            "name":     "ARCANEDEV",
+            "email":    "arcanedev.maroc@gmail.com",
+            "homepage": "https://github.com/ARCANEDEV",
+            "role":     "Developer"
         }
     ],
+    "type":    "library",
+    "license": "MIT",
     "require": {
-        "php" : ">=5.5.9",
-        "arcanedev/support": "~3.4"
+        "php" :                ">=5.5.9",
+        "arcanedev/support":   "~3.0"
     },
     "require-dev": {
         "orchestra/testbench": "~3.1",
-        "phpunit/phpunit": "~4.0",
-        "phpunit/phpcov": "~2.0"
+        "phpunit/phpunit":     "~4.0|~5.0",
+        "phpunit/phpcov":      "~2.0"
     },
     "autoload": {
         "psr-4": {
@@ -31,5 +33,9 @@
             "Arcanedev\\Gravatar\\Tests\\": "tests/"
         }
     },
-    "minimum-stability": "stable"
+    "extra": {
+        "branch-alias": {
+            "dev-master": "2.0-dev"
+        }
+    }
 }
