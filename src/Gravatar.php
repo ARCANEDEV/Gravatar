@@ -263,7 +263,7 @@ class Gravatar implements GravatarInterface
             $this->setRating($rating);
         }
 
-        return $this->get($email); // htmlentities($this->get($email));
+        return $this->get($email);
     }
 
     /**
