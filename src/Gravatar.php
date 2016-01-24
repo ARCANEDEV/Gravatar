@@ -1,9 +1,5 @@
 <?php namespace Arcanedev\Gravatar;
 
-use Arcanedev\Gravatar\Contracts\GravatarInterface;
-use Arcanedev\Gravatar\Exceptions\InvalidImageRatingException;
-use Arcanedev\Gravatar\Exceptions\InvalidImageSizeException;
-use Arcanedev\Gravatar\Exceptions\InvalidImageUrlException;
 use Arcanedev\Gravatar\Helpers\HtmlBuilder;
 
 /**
@@ -12,7 +8,7 @@ use Arcanedev\Gravatar\Helpers\HtmlBuilder;
  * @package  Arcanedev\Gravatar
  * @author   ARCANEDEV <arcanedev.maroc@gmail.com>
  */
-class Gravatar implements GravatarInterface
+class Gravatar implements Contracts\Gravatar
 {
     /* ------------------------------------------------------------------------------------------------
      |  Constants
@@ -30,35 +26,35 @@ class Gravatar implements GravatarInterface
      *
      * @var mixed
      */
-    protected $defaultImage = false;
+    protected $defaultImage     = false;
 
     /**
      * The maximum rating to allow for the avatar.
      *
      * @var string
      */
-    protected $rating       = 'g';
+    protected $rating           = 'g';
 
     /**
      * The avatar size.
      *
      * @var int
      */
-    protected $size         = 80;
+    protected $size             = 80;
 
     /**
      * Should we use the secure (HTTPS) URL base ?
      *
      * @var bool
      */
-    protected $secure       = false;
+    protected $secure           = false;
 
     /**
      * A temporary internal cache of the URL parameters.
      *
      * @var string
      */
-    protected $cachedParams  = null;
+    protected $cachedParams     = null;
 
     /**
      * Supported image defaults.
@@ -172,7 +168,7 @@ class Gravatar implements GravatarInterface
         $this->cachedParams = null;
 
         if ( ! is_val_integer($size)) {
-            throw new InvalidImageSizeException(
+            throw new Exceptions\InvalidImageSizeException(
                 'Avatar size specified must be an integer.'
             );
         }
@@ -180,7 +176,7 @@ class Gravatar implements GravatarInterface
         $size = (int) $size;
 
         if (is_int_not_between($size, 0, 512)) {
-            throw new InvalidImageSizeException(
+            throw new Exceptions\InvalidImageSizeException(
                 'Avatar size must be within 0 pixels and 512 pixels.'
             );
         }
@@ -216,7 +212,7 @@ class Gravatar implements GravatarInterface
         $rating = strtolower($rating);
 
         if ( ! in_array($rating, $this->supportedRatings)) {
-            throw new InvalidImageRatingException(
+            throw new Exceptions\InvalidImageRatingException(
                 "Invalid rating '$rating' specified, only 'g', 'pg', 'r' or 'x' are supported."
             );
         }
@@ -377,7 +373,7 @@ class Gravatar implements GravatarInterface
     private function checkImageUrl($image)
     {
         if ( ! filter_var($image, FILTER_VALIDATE_URL)) {
-            throw new InvalidImageUrlException(
+            throw new Exceptions\InvalidImageUrlException(
                 'The default image specified is not a recognized gravatar "default" and is not a valid URL'
             );
         }

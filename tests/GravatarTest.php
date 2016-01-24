@@ -14,7 +14,7 @@ class GravatarTest extends TestCase
      |  Properties
      | ------------------------------------------------------------------------------------------------
      */
-    /** @var Gravatar */
+    /** @var \Arcanedev\Gravatar\Gravatar */
     private $gravatar;
 
     /* ------------------------------------------------------------------------------------------------
@@ -25,14 +25,14 @@ class GravatarTest extends TestCase
     {
         parent::setUp();
 
-        $this->gravatar = $this->app['arcanedev.gravatar'];
+        $this->gravatar = $this->app->make('arcanedev.gravatar');
     }
 
     public function tearDown()
     {
-        parent::tearDown();
-
         unset($this->gravatar);
+
+        parent::tearDown();
     }
 
     /* ------------------------------------------------------------------------------------------------
@@ -42,10 +42,15 @@ class GravatarTest extends TestCase
     /** @test */
     public function it_can_be_instantiated()
     {
-        $this->assertInstanceOf(Gravatar::class, $this->gravatar);
-        $this->assertEquals('g', $this->gravatar->getRating());
-        $this->assertEquals(80, $this->gravatar->getSize());
-        $this->assertTrue($this->gravatar->isSecured());
+        $this->assertGravatarInstance($this->gravatar);
+
+        // By a helper function
+        $this->assertGravatarInstance(gravatar());
+
+        // By a Contract
+        $this->assertGravatarInstance(
+            $this->app->make(\Arcanedev\Gravatar\Contracts\Gravatar::class)
+        );
     }
 
     /** @test */
@@ -271,5 +276,22 @@ class GravatarTest extends TestCase
         $this->gravatar->image('', null, ['width' => 256, 'height' => 128]);
 
         $this->assertEquals(256, $this->gravatar->getSize());
+    }
+
+    /* ------------------------------------------------------------------------------------------------
+     |  Other Functions
+     | ------------------------------------------------------------------------------------------------
+     */
+    /**
+     * Assert the gravatar instance.
+     *
+     * @param  \Arcanedev\Gravatar\Contracts\Gravatar  $gravatar
+     */
+    public function assertGravatarInstance($gravatar)
+    {
+        $this->assertInstanceOf(\Arcanedev\Gravatar\Gravatar::class, $gravatar);
+        $this->assertEquals('g', $gravatar->getRating());
+        $this->assertEquals(80, $gravatar->getSize());
+        $this->assertTrue($gravatar->isSecured());
     }
 }

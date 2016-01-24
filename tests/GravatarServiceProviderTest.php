@@ -1,4 +1,5 @@
 <?php namespace Arcanedev\Gravatar\Tests;
+
 use Arcanedev\Gravatar\GravatarServiceProvider;
 
 /**
@@ -24,14 +25,14 @@ class GravatarServiceProviderTest extends TestCase
     {
         parent::setUp();
 
-        $this->provider = new GravatarServiceProvider($this->app);
+        $this->provider = $this->app->getProvider(GravatarServiceProvider::class);
     }
 
     public function tearDown()
     {
-        parent::tearDown();
-
         unset($this->provider);
+
+        parent::tearDown();
     }
 
     /* ------------------------------------------------------------------------------------------------
@@ -39,11 +40,28 @@ class GravatarServiceProviderTest extends TestCase
      | ------------------------------------------------------------------------------------------------
      */
     /** @test */
-    public function it_can_get_what_it_provides()
+    public function it_can_be_instantiated()
     {
-        $this->assertEquals(
-            ['arcanedev.gravatar'],
-            $this->provider->provides()
-        );
+        $expectations = [
+            \Illuminate\Support\ServiceProvider::class,
+            \Arcanedev\Support\ServiceProvider::class,
+            \Arcanedev\Support\PackageServiceProvider::class,
+            \Arcanedev\Gravatar\GravatarServiceProvider::class,
+        ];
+
+        foreach ($expectations as $expected) {
+            $this->assertInstanceOf($expected, $this->provider);
+        }
+    }
+
+    /** @test */
+    public function it_can_provides()
+    {
+        $expected = [
+            'arcanedev.gravatar',
+            \Arcanedev\Gravatar\Contracts\Gravatar::class,
+        ];
+
+        $this->assertEquals($expected, $this->provider->provides());
     }
 }

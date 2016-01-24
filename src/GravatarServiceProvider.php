@@ -19,14 +19,21 @@ class GravatarServiceProvider extends ServiceProvider
      *
      * @var string
      */
-    protected $vendor       = 'arcanedev';
+    protected $vendor  = 'arcanedev';
 
     /**
      * Package name.
      *
      * @var string
      */
-    protected $package      = 'gravatar';
+    protected $package = 'gravatar';
+
+    /**
+     * Indicates if loading of the provider is deferred.
+     *
+     * @var bool
+     */
+    protected $defer   = true;
 
     /* ------------------------------------------------------------------------------------------------
      |  Getters & Setters
@@ -48,8 +55,6 @@ class GravatarServiceProvider extends ServiceProvider
      */
     /**
      * Register the service provider.
-     *
-     * @return void
      */
     public function register()
     {
@@ -59,13 +64,9 @@ class GravatarServiceProvider extends ServiceProvider
 
     /**
      * Boot the service provider.
-     *
-     * @return void
      */
     public function boot()
     {
-        parent::boot();
-
         $this->publishConfig();
     }
 
@@ -76,7 +77,10 @@ class GravatarServiceProvider extends ServiceProvider
      */
     public function provides()
     {
-        return ['arcanedev.gravatar'];
+        return [
+            'arcanedev.gravatar',
+            Contracts\Gravatar::class,
+        ];
     }
 
     /* ------------------------------------------------------------------------------------------------
@@ -84,21 +88,11 @@ class GravatarServiceProvider extends ServiceProvider
      | ------------------------------------------------------------------------------------------------
      */
     /**
-     * Publishes configs.
-     */
-    private function publishConfig()
-    {
-        $this->publishes([
-            $this->getConfigFile() => config_path("{$this->package}.php"),
-        ], 'config');
-    }
-
-    /**
      * Register Gravatar Helper.
      */
     private function registerGravatar()
     {
-        $this->app->singleton('arcanedev.gravatar', function($app) {
+        $this->singleton('arcanedev.gravatar', function($app) {
             /** @var \Illuminate\Config\Repository $config */
             $config = $app['config'];
 
@@ -108,5 +102,17 @@ class GravatarServiceProvider extends ServiceProvider
                 $config->get('gravatar.max-rating', 'g')
             );
         });
+
+        $this->bind(Contracts\Gravatar::class, 'arcanedev.gravatar');
+    }
+
+    /**
+     * Publishes configs.
+     */
+    private function publishConfig()
+    {
+        $this->publishes([
+            $this->getConfigFile() => config_path("{$this->package}.php"),
+        ], 'config');
     }
 }

@@ -22,6 +22,17 @@ abstract class TestCase extends BaseTestCase
     protected $email = 'arcanedev.maroc@gmail.com';
 
     /* ------------------------------------------------------------------------------------------------
+     |  Main Functions
+     | ------------------------------------------------------------------------------------------------
+     */
+    public function setUp()
+    {
+        parent::setUp();
+
+        $this->app->loadDeferredProviders();
+    }
+
+    /* ------------------------------------------------------------------------------------------------
      |  Package Functions
      | ------------------------------------------------------------------------------------------------
      */
@@ -60,6 +71,6 @@ abstract class TestCase extends BaseTestCase
      */
     protected function getEnvironmentSetUp($app)
     {
-
+        //
     }
 }
