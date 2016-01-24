@@ -1,12 +1,12 @@
 <?php namespace Arcanedev\Gravatar\Contracts;
 
 /**
- * Interface  GravatarInterface
+ * Interface  Gravatar
  *
  * @package   Arcanedev\Gravatar\Contracts
  * @author    ARCANEDEV <arcanedev.maroc@gmail.com>
  */
-interface GravatarInterface
+interface Gravatar
 {
     /* ------------------------------------------------------------------------------------------------
      |  Getters & Setters
