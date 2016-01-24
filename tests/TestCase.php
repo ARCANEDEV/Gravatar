@@ -60,6 +60,6 @@ abstract class TestCase extends BaseTestCase
      */
     protected function getEnvironmentSetUp($app)
     {
-
+        //
     }
 }
