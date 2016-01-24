@@ -1,7 +1,17 @@
 <?php namespace Arcanedev\Gravatar\Helpers;
 
+/**
+ * Class     HtmlBuilder
+ *
+ * @package  Arcanedev\Gravatar\Helpers
+ * @author   ARCANEDEV <arcanedev.maroc@gmail.com>
+ */
 class HtmlBuilder
 {
+    /* ------------------------------------------------------------------------------------------------
+     |  Main Functions
+     | ------------------------------------------------------------------------------------------------
+     */
     /**
      * Generate an HTML image element.
      *
