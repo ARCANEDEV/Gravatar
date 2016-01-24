@@ -4,11 +4,11 @@ if ( ! function_exists('gravatar')) {
     /**
      * Get the gravatar instance.
      *
-     * @return \Arcanedev\Gravatar\Gravatar
+     * @return Arcanedev\Gravatar\Contracts\Gravatar
      */
     function gravatar()
     {
-        return app('arcanedev.gravatar');
+        return app(Arcanedev\Gravatar\Contracts\Gravatar::class);
     }
 }
 
