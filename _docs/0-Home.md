@@ -1,14 +1,14 @@
 # Gravatar
 
-Gravatar is a small library that provides an easy way to integrate and generate &hellip; Gravatars ??
+Gravatar is a small library that provides an easy way to integrate and generate &hellip; Gravatars.
 
 Feel free to check out the [releases](https://github.com/ARCANEDEV/Gravatar/releases), [license](https://github.com/ARCANEDEV/Gravatar/blob/master/LICENSE.md), and [contribution guidelines](https://github.com/ARCANEDEV/Gravatar/blob/master/CONTRIBUTING.md).
 
 ### Features
 
   * Framework-agnostic (Works in any PHP projects).
-  * Laravel 5 Supported.
-  * Easy setup & configuration. 
+  * Laravel 5.0, 5.1 & 5.2 are Supported.
+  * Easy setup & configuration.
   * Well tested (100% code coverage with maximum code quality).
   * Made with :heart: &amp; :coffee:.
 

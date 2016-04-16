@@ -4,15 +4,9 @@
 
 You can install this package via [Composer](http://getcomposer.org/) by running this command: `composer require arcanedev/gravatar`.
 
-Or by adding the package to your `composer.json`. 
+##### OR
 
-```json
-{
-    "require": {
-        "arcanedev/gravatar": "~1.0"
-    }
-}
-```    
+By adding the package `"arcanedev/gravatar": "~1.0"` inside the `"require"` in your `composer.json`.
 
 Then install it via `composer install` or `composer update`.
 
@@ -39,7 +33,7 @@ Once the package is installed, you can register the service provider in `config/
 ### Artisan command
 
 To publish the config file, run this command:
- 
+
 ```bash
 $ php artisan vendor:publish --provider="Arcanedev\Gravatar\GravatarServiceProvider"
 ```
