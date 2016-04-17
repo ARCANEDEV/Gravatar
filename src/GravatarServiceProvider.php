@@ -105,14 +105,4 @@ class GravatarServiceProvider extends ServiceProvider
 
         $this->bind(Contracts\Gravatar::class, 'arcanedev.gravatar');
     }
-
-    /**
-     * Publishes configs.
-     */
-    private function publishConfig()
-    {
-        $this->publishes([
-            $this->getConfigFile() => config_path("{$this->package}.php"),
-        ], 'config');
-    }
 }
