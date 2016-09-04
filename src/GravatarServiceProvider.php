@@ -15,13 +15,6 @@ class GravatarServiceProvider extends ServiceProvider
      | ------------------------------------------------------------------------------------------------
      */
     /**
-     * Vendor name.
-     *
-     * @var string
-     */
-    protected $vendor  = 'arcanedev';
-
-    /**
      * Package name.
      *
      * @var string
