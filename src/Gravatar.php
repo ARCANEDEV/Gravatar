@@ -122,7 +122,7 @@ class Gravatar implements Contracts\Gravatar
      *
      * @param  string|false  $image
      *
-     * @return self
+     * @return \Arcanedev\Gravatar\Gravatar
      *
      * @throws \Arcanedev\Gravatar\Exceptions\InvalidImageUrlException
      */
@@ -131,12 +131,9 @@ class Gravatar implements Contracts\Gravatar
         if ($image !== false) {
             $this->cachedParams = null;
 
-            if (in_array(strtolower($image), $this->supportedImages)) {
-                $image = strtolower($image);
-            }
-            else {
-                $this->checkImageUrl($image);
-            }
+            $image = in_array(strtolower($image), $this->supportedImages)
+                ? strtolower($image)
+                : $this->checkImageUrl($image);
         }
 
         $this->defaultImage = $image;
@@ -159,7 +156,7 @@ class Gravatar implements Contracts\Gravatar
      *
      * @param integer $size - The avatar size to use, must be less than 512 and greater than 0.
      *
-     * @return self
+     * @return \Arcanedev\Gravatar\Gravatar
      *
      * @throws \Arcanedev\Gravatar\Exceptions\InvalidImageSizeException
      */
@@ -201,7 +198,7 @@ class Gravatar implements Contracts\Gravatar
      *
      * @param  string  $rating
      *
-     * @return self
+     * @return \Arcanedev\Gravatar\Gravatar
      *
      * @throws \Arcanedev\Gravatar\Exceptions\InvalidImageRatingException
      */
@@ -310,7 +307,7 @@ class Gravatar implements Contracts\Gravatar
     /**
      * Enable the use of the secure protocol for image URLs.
      *
-     * @return self
+     * @return \Arcanedev\Gravatar\Gravatar
      */
     public function enableSecure()
     {
@@ -322,7 +319,7 @@ class Gravatar implements Contracts\Gravatar
     /**
      * Disable the use of the secure protocol for image URLs.
      *
-     * @return self
+     * @return \Arcanedev\Gravatar\Gravatar
      */
     public function disableSecure()
     {
@@ -368,6 +365,8 @@ class Gravatar implements Contracts\Gravatar
      *
      * @param  string  $image
      *
+     * @return string
+     *
      * @throws \Arcanedev\Gravatar\Exceptions\InvalidImageUrlException
      */
     private function checkImageUrl($image)
@@ -377,6 +376,8 @@ class Gravatar implements Contracts\Gravatar
                 'The default image specified is not a recognized gravatar "default" and is not a valid URL'
             );
         }
+
+        return $image;
     }
 
     /* ------------------------------------------------------------------------------------------------

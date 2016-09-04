@@ -1,11 +1,12 @@
 <?php
 
-// For more details: https://fr.gravatar.com/site/implement/images/
+// For more details: https://en.gravatar.com/site/implement/images/
+
 return [
     /* ------------------------------------------------------------------------------------------------
      |  Default
      | ------------------------------------------------------------------------------------------------
-     |  The default avatar to display if we have no results.
+     |  The default avatar to display if we have no results (you can also set a default image url).
      |
      |  Supported:
      |    * false

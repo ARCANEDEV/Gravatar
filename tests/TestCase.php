@@ -63,14 +63,4 @@ abstract class TestCase extends BaseTestCase
             'Gravatar' => \Arcanedev\Gravatar\Facades\Gravatar::class,
         ];
     }
-
-    /**
-     * Define environment setup.
-     *
-     * @param  \Illuminate\Foundation\Application   $app
-     */
-    protected function getEnvironmentSetUp($app)
-    {
-        //
-    }
 }

@@ -62,7 +62,7 @@ class GravatarTest extends TestCase
         foreach (range($mix, $max) as $size) {
             $this->gravatar->setSize($size);
 
-            $this->assertEquals($size, $this->gravatar->getSize());
+            $this->assertSame($size, $this->gravatar->getSize());
         }
     }
 
@@ -111,18 +111,18 @@ class GravatarTest extends TestCase
     }
 
     /** @test */
-    public function it_can_setand_get_default_image_url()
+    public function it_can_set_and_get_default_image_url()
     {
         $this->gravatar = new Gravatar('http://www.hello.com/img.png');
 
-        $this->assertEquals(
+        $this->assertSame(
             "https://secure.gravatar.com/avatar/00000000000000000000000000000000?s=80&r=g&d=http%3A%2F%2Fwww.hello.com%2Fimg.png&f=y",
             $this->gravatar->get('')
         );
 
         $hashed = md5($this->email);
 
-        $this->assertEquals(
+        $this->assertSame(
             "https://secure.gravatar.com/avatar/$hashed?s=80&r=g&d=http%3A%2F%2Fwww.hello.com%2Fimg.png",
             $this->gravatar->get($this->email)
         );
@@ -156,7 +156,7 @@ class GravatarTest extends TestCase
         $expected = md5($this->email);
 
         foreach ($emails as $email) {
-            $this->assertEquals(
+            $this->assertSame(
                 $expected, $this->gravatar->hashEmail($email)
             );
         }
@@ -178,7 +178,7 @@ class GravatarTest extends TestCase
         foreach($emails as $email) {
             $url = $this->gravatar->get($email);
 
-            $this->assertEquals(1, preg_match($pattern, $url));
+            $this->assertSame(1, preg_match($pattern, $url));
         }
     }
 
@@ -187,8 +187,8 @@ class GravatarTest extends TestCase
     {
         $expected = 'https://secure.gravatar.com/avatar/00000000000000000000000000000000?s=80&r=g&d=identicon&f=y';
 
-        $this->assertEquals($expected, $this->gravatar->get(''));
-        $this->assertEquals($expected, $this->gravatar->get('', false));
+        $this->assertSame($expected, $this->gravatar->get(''));
+        $this->assertSame($expected, $this->gravatar->get('', false));
     }
 
     /** @test */
@@ -196,21 +196,21 @@ class GravatarTest extends TestCase
     {
         $hashed = md5($this->email);
 
-        $this->assertEquals(
+        $this->assertSame(
             "https://secure.gravatar.com/avatar/$hashed?s=80&r=g&d=identicon",
             $this->gravatar->src($this->email)
         );
 
         $size   = 128;
 
-        $this->assertEquals(
+        $this->assertSame(
             "https://secure.gravatar.com/avatar/$hashed?s=$size&r=g&d=identicon",
             $this->gravatar->src($this->email, $size)
         );
 
         $rating = 'r';
 
-        $this->assertEquals(
+        $this->assertSame(
             "https://secure.gravatar.com/avatar/$hashed?s=$size&r=$rating&d=identicon",
             $this->gravatar->src($this->email, $size, $rating)
         );
@@ -221,19 +221,19 @@ class GravatarTest extends TestCase
     {
         $hashed = md5($this->email);
 
-        $this->assertEquals(
+        $this->assertSame(
             "<img src=\"https://secure.gravatar.com/avatar/$hashed?s=80&r=g&d=identicon\">",
             $this->gravatar->image($this->email)
         );
 
         $alt = 'ARCANEDEV';
 
-        $this->assertEquals(
+        $this->assertSame(
             "<img src=\"https://secure.gravatar.com/avatar/$hashed?s=80&r=g&d=identicon\" alt=\"$alt\">",
             $this->gravatar->image($this->email, $alt)
         );
 
-        $this->assertEquals(
+        $this->assertSame(
             "<img src=\"https://secure.gravatar.com/avatar/$hashed?s=80&r=g&d=identicon\" class=\"img-responsive\" alt=\"$alt\">",
             $this->gravatar->image($this->email, $alt, ['class'  => 'img-responsive'])
         );
@@ -252,7 +252,7 @@ class GravatarTest extends TestCase
     {
         $this->gravatar = new Gravatar(false);
 
-        $this->assertEquals(
+        $this->assertSame(
             'https://secure.gravatar.com/avatar/00000000000000000000000000000000?s=80&r=g&f=y',
             $this->gravatar->get('')
         );
@@ -263,19 +263,19 @@ class GravatarTest extends TestCase
     {
         $this->gravatar->image('', null, ['width' => 32]);
 
-        $this->assertEquals(32, $this->gravatar->getSize());
+        $this->assertSame(32, $this->gravatar->getSize());
 
         $this->gravatar->image('', null, ['height' => 64]);
 
-        $this->assertEquals(64, $this->gravatar->getSize());
+        $this->assertSame(64, $this->gravatar->getSize());
 
         $this->gravatar->image('', null, ['width' => 64, 'height' => 128]);
 
-        $this->assertEquals(128, $this->gravatar->getSize());
+        $this->assertSame(128, $this->gravatar->getSize());
 
         $this->gravatar->image('', null, ['width' => 256, 'height' => 128]);
 
-        $this->assertEquals(256, $this->gravatar->getSize());
+        $this->assertSame(256, $this->gravatar->getSize());
     }
 
     /* ------------------------------------------------------------------------------------------------
@@ -290,8 +290,8 @@ class GravatarTest extends TestCase
     public function assertGravatarInstance($gravatar)
     {
         $this->assertInstanceOf(\Arcanedev\Gravatar\Gravatar::class, $gravatar);
-        $this->assertEquals('g', $gravatar->getRating());
-        $this->assertEquals(80, $gravatar->getSize());
+        $this->assertSame('g', $gravatar->getRating());
+        $this->assertSame(80, $gravatar->getSize());
         $this->assertTrue($gravatar->isSecured());
     }
 }

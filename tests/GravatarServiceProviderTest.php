@@ -62,6 +62,6 @@ class GravatarServiceProviderTest extends TestCase
             \Arcanedev\Gravatar\Contracts\Gravatar::class,
         ];
 
-        $this->assertEquals($expected, $this->provider->provides());
+        $this->assertSame($expected, $this->provider->provides());
     }
 }
