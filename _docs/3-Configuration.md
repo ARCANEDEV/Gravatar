@@ -16,6 +16,8 @@ Allowed defaults:
 | `wavatar`   | generated faces with differing features and backgrounds.                                                              |
 | `retro`     | awesome generated, 8-bit arcade-style pixelated faces.                                                                |
 
+> **Note :** You can also specify an image URL as a default image.
+
 Example images can be viewed on [the Gravatar website](https://gravatar.com/site/implement/images/).
 
 ### Size
