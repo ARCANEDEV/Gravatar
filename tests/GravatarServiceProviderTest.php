@@ -58,7 +58,6 @@ class GravatarServiceProviderTest extends TestCase
     public function it_can_provides()
     {
         $expected = [
-            'arcanedev.gravatar',
             \Arcanedev\Gravatar\Contracts\Gravatar::class,
         ];
 

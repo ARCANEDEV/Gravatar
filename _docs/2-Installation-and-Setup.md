@@ -1,14 +1,26 @@
 # 2. Installation
 
+## Version Compatibility
+
+| Gravatar                       | Laravel                                                                                                             |
+|:-------------------------------|:--------------------------------------------------------------------------------------------------------------------|
+| ![Gravatar v1.x][gravatar_1_x] | ![Laravel v5.0][laravel_5_0] ![Laravel v5.1][laravel_5_1] ![Laravel v5.2][laravel_5_2] ![Laravel v5.3][laravel_5_3] |
+| ![Gravatar v2.x][gravatar_2_x] | ![Laravel v5.4][laravel_5_4]                                                                                        |
+
+> **Note :** This is a framework-agnostic package, so you can use any version of this package in your PHP project.
+
+[laravel_5_0]:    https://img.shields.io/badge/v5.0-supported-brightgreen.svg?style=flat-square "Laravel v5.0"
+[laravel_5_1]:    https://img.shields.io/badge/v5.1-supported-brightgreen.svg?style=flat-square "Laravel v5.1"
+[laravel_5_2]:    https://img.shields.io/badge/v5.2-supported-brightgreen.svg?style=flat-square "Laravel v5.2"
+[laravel_5_3]:    https://img.shields.io/badge/v5.3-supported-brightgreen.svg?style=flat-square "Laravel v5.3"
+[laravel_5_4]:    https://img.shields.io/badge/v5.4-supported-brightgreen.svg?style=flat-square "Laravel v5.4"
+
+[gravatar_1_x]: https://img.shields.io/badge/version-1.*-blue.svg?style=flat-square "Gravatar v1.*"
+[gravatar_2_x]: https://img.shields.io/badge/version-2.*-blue.svg?style=flat-square "Gravatar v3.*"
+
 ## Composer
 
 You can install this package via [Composer](http://getcomposer.org/) by running this command: `composer require arcanedev/gravatar`.
-
-##### OR
-
-By adding the package `"arcanedev/gravatar": "~1.0"` inside the `"require"` in your `composer.json`.
-
-Then install it via `composer install` or `composer update`.
 
 ## Laravel Setup
 

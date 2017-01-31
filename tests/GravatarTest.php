@@ -25,7 +25,7 @@ class GravatarTest extends TestCase
     {
         parent::setUp();
 
-        $this->gravatar = $this->app->make('arcanedev.gravatar');
+        $this->gravatar = $this->app->make(\Arcanedev\Gravatar\Contracts\Gravatar::class);
     }
 
     public function tearDown()
