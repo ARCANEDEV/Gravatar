@@ -71,7 +71,6 @@ class GravatarServiceProvider extends ServiceProvider
     public function provides()
     {
         return [
-            'arcanedev.gravatar',
             Contracts\Gravatar::class,
         ];
     }
@@ -85,7 +84,7 @@ class GravatarServiceProvider extends ServiceProvider
      */
     private function registerGravatar()
     {
-        $this->singleton('arcanedev.gravatar', function($app) {
+        $this->singleton(Contracts\Gravatar::class, function($app) {
             /** @var \Illuminate\Config\Repository $config */
             $config = $app['config'];
 
@@ -95,7 +94,5 @@ class GravatarServiceProvider extends ServiceProvider
                 $config->get('gravatar.max-rating', 'g')
             );
         });
-
-        $this->bind(Contracts\Gravatar::class, 'arcanedev.gravatar');
     }
 }
