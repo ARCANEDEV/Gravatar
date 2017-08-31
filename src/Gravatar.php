@@ -1,6 +1,7 @@
 <?php namespace Arcanedev\Gravatar;
 
 use Arcanedev\Gravatar\Helpers\HtmlBuilder;
+use Arcanedev\Gravatar\Helpers\NumberChecker;
 
 /**
  * Class     Gravatar
@@ -10,17 +11,19 @@ use Arcanedev\Gravatar\Helpers\HtmlBuilder;
  */
 class Gravatar implements Contracts\Gravatar
 {
-    /* ------------------------------------------------------------------------------------------------
+    /* -----------------------------------------------------------------
      |  Constants
-     | ------------------------------------------------------------------------------------------------
+     | -----------------------------------------------------------------
      */
+
     const BASE_URL   = 'http://www.gravatar.com/avatar/';
     const SECURE_URL = 'https://secure.gravatar.com/avatar/';
 
-    /* ------------------------------------------------------------------------------------------------
+    /* -----------------------------------------------------------------
      |  Properties
-     | ------------------------------------------------------------------------------------------------
+     | -----------------------------------------------------------------
      */
+
     /**
      * The default image to use (gravatar-recognized type, url or false = default gravatar image)
      *
@@ -52,7 +55,7 @@ class Gravatar implements Contracts\Gravatar
     /**
      * A temporary internal cache of the URL parameters.
      *
-     * @var string
+     * @var array|null
      */
     protected $cachedParams     = null;
 
@@ -84,10 +87,11 @@ class Gravatar implements Contracts\Gravatar
         'x'    // may contain hardcore sexual imagery or extremely disturbing violence.
     ];
 
-    /* ------------------------------------------------------------------------------------------------
+    /* -----------------------------------------------------------------
      |  Constructor
-     | ------------------------------------------------------------------------------------------------
+     | -----------------------------------------------------------------
      */
+
     /**
      * Make a gravatar instance.
      *
@@ -103,10 +107,11 @@ class Gravatar implements Contracts\Gravatar
         $this->enableSecure();
     }
 
-    /* ------------------------------------------------------------------------------------------------
+    /* -----------------------------------------------------------------
      |  Getters & Setters
-     | ------------------------------------------------------------------------------------------------
+     | -----------------------------------------------------------------
      */
+
     /**
      * Get the current default image setting.
      *
@@ -164,19 +169,7 @@ class Gravatar implements Contracts\Gravatar
     {
         $this->cachedParams = null;
 
-        if ( ! is_val_integer($size)) {
-            throw new Exceptions\InvalidImageSizeException(
-                'Avatar size specified must be an integer.'
-            );
-        }
-
-        $size = (int) $size;
-
-        if (is_int_not_between($size, 0, 512)) {
-            throw new Exceptions\InvalidImageSizeException(
-                'Avatar size must be within 0 pixels and 512 pixels.'
-            );
-        }
+        $this->checkSize($size);
 
         $this->size = $size;
 
@@ -229,10 +222,11 @@ class Gravatar implements Contracts\Gravatar
         return $this->secure;
     }
 
-    /* ------------------------------------------------------------------------------------------------
-     |  Main Functions
-     | ------------------------------------------------------------------------------------------------
+    /* -----------------------------------------------------------------
+     |  Main Methods
+     | -----------------------------------------------------------------
      */
+
     /**
      * Get Gravatar image source.
      *
@@ -289,7 +283,7 @@ class Gravatar implements Contracts\Gravatar
      *
      * @return string
      */
-    public function image($email, $alt = null, $attributes = [], $rating = null)
+    public function image($email, $alt = null, array $attributes = [], $rating = null)
     {
         $dimensions = array_values(
             array_only($attributes, ['width', 'height'])
@@ -356,10 +350,11 @@ class Gravatar implements Contracts\Gravatar
         return hash('md5', strtolower(trim($email)));
     }
 
-    /* ------------------------------------------------------------------------------------------------
-     |  Check Functions
-     | ------------------------------------------------------------------------------------------------
+    /* -----------------------------------------------------------------
+     |  Check Methods
+     | -----------------------------------------------------------------
      */
+
     /**
      * Check image url.
      *
@@ -380,10 +375,11 @@ class Gravatar implements Contracts\Gravatar
         return $image;
     }
 
-    /* ------------------------------------------------------------------------------------------------
-     |  Other Functions
-     | ------------------------------------------------------------------------------------------------
+    /* -----------------------------------------------------------------
+     |  Other Methods
+     | -----------------------------------------------------------------
      */
+
     /**
      * Get params.
      *
@@ -411,5 +407,27 @@ class Gravatar implements Contracts\Gravatar
         }
 
         return (array) $params;
+    }
+
+    /**
+     * Check the image size.
+     *
+     * @param  int  $size
+     */
+    private function checkSize(&$size)
+    {
+        if ( ! NumberChecker::isIntValue($size)) {
+            throw new Exceptions\InvalidImageSizeException(
+                'Avatar size specified must be an integer.'
+            );
+        }
+
+        $size = (int) $size;
+
+        if ( ! NumberChecker::isIntBetween($size, 0, 512)) {
+            throw new Exceptions\InvalidImageSizeException(
+                'Avatar size must be within 0 pixels and 512 pixels.'
+            );
+        }
     }
 }

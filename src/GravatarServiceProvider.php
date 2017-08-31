@@ -10,10 +10,11 @@ use Arcanedev\Support\PackageServiceProvider as ServiceProvider;
  */
 class GravatarServiceProvider extends ServiceProvider
 {
-    /* ------------------------------------------------------------------------------------------------
+    /* -----------------------------------------------------------------
      |  Properties
-     | ------------------------------------------------------------------------------------------------
+     | -----------------------------------------------------------------
      */
+
     /**
      * Package name.
      *
@@ -28,29 +29,18 @@ class GravatarServiceProvider extends ServiceProvider
      */
     protected $defer   = true;
 
-    /* ------------------------------------------------------------------------------------------------
-     |  Getters & Setters
-     | ------------------------------------------------------------------------------------------------
+    /* -----------------------------------------------------------------
+     |  Main Methods
+     | -----------------------------------------------------------------
      */
-    /**
-     * Get the base path of the package.
-     *
-     * @return string
-     */
-    public function getBasePath()
-    {
-        return dirname(__DIR__);
-    }
 
-    /* ------------------------------------------------------------------------------------------------
-     |  Main Functions
-     | ------------------------------------------------------------------------------------------------
-     */
     /**
      * Register the service provider.
      */
     public function register()
     {
+        parent::register();
+
         $this->registerConfig();
         $this->registerGravatar();
     }
@@ -60,6 +50,8 @@ class GravatarServiceProvider extends ServiceProvider
      */
     public function boot()
     {
+        parent::boot();
+
         $this->publishConfig();
     }
 
@@ -75,17 +67,18 @@ class GravatarServiceProvider extends ServiceProvider
         ];
     }
 
-    /* ------------------------------------------------------------------------------------------------
-     |  Other Functions
-     | ------------------------------------------------------------------------------------------------
+    /* -----------------------------------------------------------------
+     |  Other Methods
+     | -----------------------------------------------------------------
      */
+
     /**
      * Register Gravatar Helper.
      */
     private function registerGravatar()
     {
         $this->singleton(Contracts\Gravatar::class, function($app) {
-            /** @var \Illuminate\Config\Repository $config */
+            /** @var  \Illuminate\Contracts\Config\Repository  $config */
             $config = $app['config'];
 
             return new Gravatar(

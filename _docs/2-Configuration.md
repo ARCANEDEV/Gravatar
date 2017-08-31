@@ -1,5 +1,11 @@
 # 3. Configuration (For Laravel Only)
 
+## Table of contents
+
+  1. [Installation and Setup](1-Installation-and-Setup.md)
+  2. [Configuration](2-Configuration.md)
+  3. [Usage](3-Usage.md)
+
 ### Default Image
 
 Update the config file `config\gravatar.php` to specify the default avatar size to use and a default image to be return if no Gravatar is found.
