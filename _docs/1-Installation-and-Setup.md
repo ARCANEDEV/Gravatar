@@ -14,11 +14,11 @@ The Gravatar package has a few system requirements:
     
 ## Version Compatibility
 
-| Gravatar                       | Laravel                                                                                                             |
-|:-------------------------------|:--------------------------------------------------------------------------------------------------------------------|
-| ![Gravatar v1.x][gravatar_1_x] | ![Laravel v5.0][laravel_5_0] ![Laravel v5.1][laravel_5_1] ![Laravel v5.2][laravel_5_2] ![Laravel v5.3][laravel_5_3] |
-| ![Gravatar v2.x][gravatar_2_x] | ![Laravel v5.4][laravel_5_4]                                                                                        |
-| ![Gravatar v3.x][gravatar_3_x] | ![Laravel v5.3][laravel_5_3]                                                                                        |
+| Gravatar                         | Laravel                                                                                                             |
+|:---------------------------------|:--------------------------------------------------------------------------------------------------------------------|
+| ![Gravatar v1.x][gravatar_1_x]   | ![Laravel v5.0][laravel_5_0] ![Laravel v5.1][laravel_5_1] ![Laravel v5.2][laravel_5_2] ![Laravel v5.3][laravel_5_3] |
+| ![Gravatar v2.0.x][gravatar_2_0] | ![Laravel v5.4][laravel_5_4]                                                                                        |
+| ![Gravatar v2.1.x][gravatar_2_1] | ![Laravel v5.3][laravel_5_5]                                                                                        |
 
 > **Note :** This is a framework-agnostic package, so you can use any version of this package in your PHP project.
 
@@ -30,8 +30,8 @@ The Gravatar package has a few system requirements:
 [laravel_5_5]:    https://img.shields.io/badge/v5.5-supported-brightgreen.svg?style=flat-square "Laravel v5.5"
 
 [gravatar_1_x]: https://img.shields.io/badge/version-1.*-blue.svg?style=flat-square "Gravatar v1.*"
-[gravatar_2_x]: https://img.shields.io/badge/version-2.*-blue.svg?style=flat-square "Gravatar v2.*"
-[gravatar_3_x]: https://img.shields.io/badge/version-3.*-blue.svg?style=flat-square "Gravatar v3.*"
+[gravatar_2_0]: https://img.shields.io/badge/version-2.0.*-blue.svg?style=flat-square "Gravatar v2.0.*"
+[gravatar_2_1]: https://img.shields.io/badge/version-2.1.*-blue.svg?style=flat-square "Gravatar v2.1.*"
 
 ## Composer
 
