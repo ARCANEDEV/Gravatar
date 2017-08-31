@@ -18,7 +18,7 @@ The Gravatar package has a few system requirements:
 |:---------------------------------|:--------------------------------------------------------------------------------------------------------------------|
 | ![Gravatar v1.x][gravatar_1_x]   | ![Laravel v5.0][laravel_5_0] ![Laravel v5.1][laravel_5_1] ![Laravel v5.2][laravel_5_2] ![Laravel v5.3][laravel_5_3] |
 | ![Gravatar v2.0.x][gravatar_2_0] | ![Laravel v5.4][laravel_5_4]                                                                                        |
-| ![Gravatar v2.1.x][gravatar_2_1] | ![Laravel v5.3][laravel_5_5]                                                                                        |
+| ![Gravatar v2.1.x][gravatar_2_1] | ![Laravel v5.5][laravel_5_5]                                                                                        |
 
 > **Note :** This is a framework-agnostic package, so you can use any version of this package in your PHP project.
 
