@@ -2,9 +2,12 @@
 
 ## Table of contents
 
-* [Hard coded](#hard-coded)
-* [Laravel](#laravel)
-* [API](#api)
+  1. [Installation and Setup](1-Installation-and-Setup.md)
+  2. [Configuration](2-Configuration.md)
+  3. [Usage](3-Usage.md)
+     * [Hard coded](#hard-coded)
+     * [Laravel](#laravel)
+     * [API](#api)
 
 ### Hard coded
 
@@ -219,7 +222,7 @@ public function get($email, $hash = true);
  *
  * @return string
  */
-public function image($email, $alt = null, $attributes = [], $rating = null);
+public function image($email, $alt = null, array $attributes = [], $rating = null);
 
 /**
  * Enable the use of the secure protocol for image URLs.

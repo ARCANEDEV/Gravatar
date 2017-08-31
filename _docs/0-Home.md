@@ -7,7 +7,7 @@ Feel free to check out the [releases](https://github.com/ARCANEDEV/Gravatar/rele
 ### Features
 
   * Framework-agnostic package.
-  * Laravel `5.0 | 5.1 | 5.2 | 5.3 | 5.4` are Supported.
+  * Laravel `5.0 | 5.1 | 5.2 | 5.3 | 5.4 | 5.5` are Supported.
   * Easy setup & configuration.
   * Well tested (100% code coverage with maximum code quality).
   * Made with :heart: &amp; :coffee:.
