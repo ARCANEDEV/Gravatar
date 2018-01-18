@@ -1,5 +1,6 @@
 <?php namespace Arcanedev\Gravatar\Facades;
 
+use Arcanedev\Gravatar\Contracts\Gravatar as GravatarContract;
 use Illuminate\Support\Facades\Facade;
 
 /**
@@ -15,5 +16,5 @@ class Gravatar extends Facade
      *
      * @return string
      */
-    protected static function getFacadeAccessor() { return 'arcanedev.gravatar'; }
+    protected static function getFacadeAccessor() { return GravatarContract::class; }
 }
