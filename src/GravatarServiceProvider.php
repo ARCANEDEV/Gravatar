@@ -42,7 +42,17 @@ class GravatarServiceProvider extends ServiceProvider
         parent::register();
 
         $this->registerConfig();
-        $this->registerGravatar();
+
+        $this->singleton(Contracts\Gravatar::class, function($app) {
+            /** @var  \Illuminate\Contracts\Config\Repository  $config */
+            $config = $app['config'];
+
+            return new Gravatar(
+                $config->get('gravatar.default', 'mm'),
+                $config->get('gravatar.size', 80),
+                $config->get('gravatar.max-rating', 'g')
+            );
+        });
     }
 
     /**
@@ -65,27 +75,5 @@ class GravatarServiceProvider extends ServiceProvider
         return [
             Contracts\Gravatar::class,
         ];
-    }
-
-    /* -----------------------------------------------------------------
-     |  Other Methods
-     | -----------------------------------------------------------------
-     */
-
-    /**
-     * Register Gravatar Helper.
-     */
-    private function registerGravatar()
-    {
-        $this->singleton(Contracts\Gravatar::class, function($app) {
-            /** @var  \Illuminate\Contracts\Config\Repository  $config */
-            $config = $app['config'];
-
-            return new Gravatar(
-                $config->get('gravatar.default', 'mm'),
-                $config->get('gravatar.size', 80),
-                $config->get('gravatar.max-rating', 'g')
-            );
-        });
     }
 }
