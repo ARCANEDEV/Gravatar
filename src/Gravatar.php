@@ -64,28 +64,14 @@ class Gravatar implements Contracts\Gravatar
      *
      * @var array
      */
-    private $supportedImages    = [
-        '404',        // Do not load any image if none is associated with the email hash,
-                      // instead return an HTTP 404 response
-        'mm',         // (mystery-man) a simple, cartoon-style silhouetted outline of a person.
-        'identicon',  // a geometric pattern based on an email hash
-        'monsterid',  // a generated 'monster' with different colors, faces, etc
-        'wavatar',    // generated faces with differing features and backgrounds
-        'retro',      // awesome generated, 8-bit arcade-style pixelated faces
-        // 'blank',
-    ];
+    private $supportedImages    = ['404', 'mm', 'identicon', 'monsterid', 'wavatar', 'retro'];
 
     /**
      * Supported image ratings.
      *
      * @var array
      */
-    private $supportedRatings   = [
-        'g',   // suitable for display on all websites with any audience type.
-        'pg',  // may contain rude gestures, provocatively dressed individuals, the lesser swear words, or mild violence.
-        'r',   // may contain such things as harsh profanity, intense violence, nudity, or hard drug use.
-        'x'    // may contain hardcore sexual imagery or extremely disturbing violence.
-    ];
+    private $supportedRatings   = ['g', 'pg', 'r', 'x'];
 
     /* -----------------------------------------------------------------
      |  Constructor
@@ -270,7 +256,7 @@ class Gravatar implements Contracts\Gravatar
 
         $params = $this->getParams($email);
 
-        return $url . '?' . http_build_query($params);
+        return $url.'?'.http_build_query($params);
     }
 
     /**
@@ -293,9 +279,9 @@ class Gravatar implements Contracts\Gravatar
             ? min(512, max($dimensions))
             : $this->getSize();
 
-        $src  = $this->src($email, $size, $rating);
-
-        return HtmlBuilder::image($src, $alt, $attributes);
+        return HtmlBuilder::image(
+            $this->src($email, $size, $rating), $alt, $attributes
+        );
     }
 
     /**
