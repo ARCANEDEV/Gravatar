@@ -10,7 +10,7 @@
 
 The Gravatar package has a few system requirements:
 
-    - PHP >= 7.0
+    - PHP >= 7.1.3
     
 ## Version Compatibility
 
@@ -19,6 +19,7 @@ The Gravatar package has a few system requirements:
 | ![Gravatar v1.x][gravatar_1_x]   | ![Laravel v5.0][laravel_5_0] ![Laravel v5.1][laravel_5_1] ![Laravel v5.2][laravel_5_2] ![Laravel v5.3][laravel_5_3] |
 | ![Gravatar v2.0.x][gravatar_2_0] | ![Laravel v5.4][laravel_5_4]                                                                                        |
 | ![Gravatar v2.1.x][gravatar_2_1] | ![Laravel v5.5][laravel_5_5]                                                                                        |
+| ![Gravatar v2.2.x][gravatar_2_2] | ![Laravel v5.6][laravel_5_6]                                                                                        |
 
 > **Note :** This is a framework-agnostic package, so you can use any version of this package in your PHP project.
 
@@ -28,16 +29,20 @@ The Gravatar package has a few system requirements:
 [laravel_5_3]:    https://img.shields.io/badge/v5.3-supported-brightgreen.svg?style=flat-square "Laravel v5.3"
 [laravel_5_4]:    https://img.shields.io/badge/v5.4-supported-brightgreen.svg?style=flat-square "Laravel v5.4"
 [laravel_5_5]:    https://img.shields.io/badge/v5.5-supported-brightgreen.svg?style=flat-square "Laravel v5.5"
+[laravel_5_6]:    https://img.shields.io/badge/v5.6-supported-brightgreen.svg?style=flat-square "Laravel v5.6"
 
 [gravatar_1_x]: https://img.shields.io/badge/version-1.*-blue.svg?style=flat-square "Gravatar v1.*"
 [gravatar_2_0]: https://img.shields.io/badge/version-2.0.*-blue.svg?style=flat-square "Gravatar v2.0.*"
 [gravatar_2_1]: https://img.shields.io/badge/version-2.1.*-blue.svg?style=flat-square "Gravatar v2.1.*"
+[gravatar_2_2]: https://img.shields.io/badge/version-2.2.*-blue.svg?style=flat-square "Gravatar v2.2.*"
 
 ## Composer
 
 You can install this package via [Composer](http://getcomposer.org/) by running this command: `composer require arcanedev/gravatar`.
 
 ## Laravel Setup
+
+> **NOTE :** The package will automatically register itself if you're using Laravel `>= v5.5`, so you can skip this section.
 
 Once the package is installed, you can register the service provider in `config/app.php` in the `providers` array:
 
