@@ -8,10 +8,11 @@
  */
 class HtmlBuilder
 {
-    /* ------------------------------------------------------------------------------------------------
-     |  Main Functions
-     | ------------------------------------------------------------------------------------------------
+    /* -----------------------------------------------------------------
+     |  Main Methods
+     | -----------------------------------------------------------------
      */
+
     /**
      * Generate an HTML image element.
      *
@@ -25,7 +26,7 @@ class HtmlBuilder
     {
         $attributes['alt'] = $alt;
 
-        return '<img src="' . $url . '"' . self::attributes($attributes) . '>';
+        return '<img src="'.$url.'"'.static::attributes($attributes).'>';
     }
 
 
@@ -44,13 +45,18 @@ class HtmlBuilder
         // as this will convert HTML attributes such as "required" to a correct
         // form like required="required" instead of using incorrect numerics.
         foreach ((array) $attributes as $key => $value) {
-            $html[] = self::attributeElement($key, $value);
+            $html[] = static::attributeElement($key, $value);
         }
 
         $html = array_filter($html);
 
-        return count($html) > 0 ? ' ' . implode(' ', $html) : '';
+        return count($html) > 0 ? ' '.implode(' ', $html) : '';
     }
+
+    /* -----------------------------------------------------------------
+     |  Other Methods
+     | -----------------------------------------------------------------
+     */
 
     /**
      * Build a single attribute element.
@@ -60,16 +66,11 @@ class HtmlBuilder
      *
      * @return string|null
      */
-    private static function attributeElement($key, $value)
+    protected static function attributeElement($key, $value)
     {
-        if (is_numeric($key)) {
+        if (is_numeric($key))
             $key = $value;
-        }
 
-        if ( ! is_null($value)) {
-            return $key . '="' . htmlentities($value, ENT_QUOTES, 'UTF-8', false) . '"';
-        }
-
-        return null;
+        return is_null($value) ? null : $key.'="'.e($value).'"';
     }
 }
