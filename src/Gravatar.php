@@ -187,11 +187,8 @@ class Gravatar implements Contracts\Gravatar
 
         $rating = strtolower($rating);
 
-        if ( ! in_array($rating, $this->supportedRatings)) {
-            throw new Exceptions\InvalidImageRatingException(
-                "Invalid rating '$rating' specified, only 'g', 'pg', 'r' or 'x' are supported."
-            );
-        }
+        if ( ! in_array($rating, $this->supportedRatings))
+            throw Exceptions\InvalidImageRatingException::make($rating);
 
         $this->rating = $rating;
 
@@ -353,9 +350,7 @@ class Gravatar implements Contracts\Gravatar
     private function checkImageUrl($image)
     {
         if ( ! filter_var($image, FILTER_VALIDATE_URL)) {
-            throw new Exceptions\InvalidImageUrlException(
-                'The default image specified is not a recognized gravatar "default" and is not a valid URL'
-            );
+            throw Exceptions\InvalidImageUrlException::make();
         }
 
         return $image;

@@ -8,4 +8,12 @@ use InvalidArgumentException;
  * @package  Arcanedev\Gravatar\Exceptions
  * @author   ARCANEDEV <arcanedev.maroc@gmail.com>
  */
-class InvalidImageUrlException extends InvalidArgumentException {}
+class InvalidImageUrlException extends InvalidArgumentException
+{
+    public static function make()
+    {
+        return new static(
+            'The default image specified is not a recognized gravatar "default" and is not a valid URL'
+        );
+    }
+}
