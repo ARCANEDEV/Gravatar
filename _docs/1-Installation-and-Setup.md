@@ -20,6 +20,7 @@ The Gravatar package has a few system requirements:
 | ![Gravatar v2.0.x][gravatar_2_0] | ![Laravel v5.4][laravel_5_4]                                                                                        |
 | ![Gravatar v2.1.x][gravatar_2_1] | ![Laravel v5.5][laravel_5_5]                                                                                        |
 | ![Gravatar v2.2.x][gravatar_2_2] | ![Laravel v5.6][laravel_5_6]                                                                                        |
+| ![Gravatar v2.3.x][gravatar_2_3] | ![Laravel v5.7][laravel_5_7]                                                                                        |
 
 > **Note :** This is a framework-agnostic package, so you can use any version of this package in your PHP project.
 
@@ -30,11 +31,13 @@ The Gravatar package has a few system requirements:
 [laravel_5_4]:    https://img.shields.io/badge/v5.4-supported-brightgreen.svg?style=flat-square "Laravel v5.4"
 [laravel_5_5]:    https://img.shields.io/badge/v5.5-supported-brightgreen.svg?style=flat-square "Laravel v5.5"
 [laravel_5_6]:    https://img.shields.io/badge/v5.6-supported-brightgreen.svg?style=flat-square "Laravel v5.6"
+[laravel_5_7]:    https://img.shields.io/badge/v5.7-supported-brightgreen.svg?style=flat-square "Laravel v5.7"
 
 [gravatar_1_x]: https://img.shields.io/badge/version-1.*-blue.svg?style=flat-square "Gravatar v1.*"
 [gravatar_2_0]: https://img.shields.io/badge/version-2.0.*-blue.svg?style=flat-square "Gravatar v2.0.*"
 [gravatar_2_1]: https://img.shields.io/badge/version-2.1.*-blue.svg?style=flat-square "Gravatar v2.1.*"
 [gravatar_2_2]: https://img.shields.io/badge/version-2.2.*-blue.svg?style=flat-square "Gravatar v2.2.*"
+[gravatar_2_3]: https://img.shields.io/badge/version-2.3.*-blue.svg?style=flat-square "Gravatar v2.3.*"
 
 ## Composer
 

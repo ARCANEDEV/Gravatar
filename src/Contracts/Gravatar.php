@@ -108,7 +108,7 @@ interface Gravatar
      * @param  array        $attributes
      * @param  string|null  $rating
      *
-     * @return string
+     * @return \Arcanedev\Html\Elements\Img
      */
     public function image($email, $alt = null, array $attributes = [], $rating = null);
 
