@@ -8,4 +8,12 @@ use InvalidArgumentException;
  * @package  Arcanedev\Gravatar\Exceptions
  * @author   ARCANEDEV <arcanedev.maroc@gmail.com>
  */
-class InvalidImageRatingException extends InvalidArgumentException {}
+class InvalidImageRatingException extends InvalidArgumentException
+{
+    public static function make(string $rating)
+    {
+        return new static(
+            "Invalid rating '{$rating}' specified, only 'g', 'pg', 'r' or 'x' are supported."
+        );
+    }
+}
