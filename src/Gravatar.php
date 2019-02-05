@@ -1,7 +1,8 @@
 <?php namespace Arcanedev\Gravatar;
 
-use Arcanedev\Gravatar\Helpers\HtmlBuilder;
 use Arcanedev\Gravatar\Helpers\NumberChecker;
+use Arcanedev\Html\Elements\Img;
+use Illuminate\Support\Arr;
 
 /**
  * Class     Gravatar
@@ -264,21 +265,22 @@ class Gravatar implements Contracts\Gravatar
      * @param  array        $attributes
      * @param  string|null  $rating
      *
-     * @return string
+     * @return \Arcanedev\Html\Elements\Img
      */
     public function image($email, $alt = null, array $attributes = [], $rating = null)
     {
         $dimensions = array_values(
-            array_only($attributes, ['width', 'height'])
+            Arr::only($attributes, ['width', 'height'])
         );
 
         $size = count($dimensions)
             ? min(512, max($dimensions))
             : $this->getSize();
 
-        return HtmlBuilder::image(
-            $this->src($email, $size, $rating), $alt, $attributes
-        );
+        return Img::make()
+                  ->src($this->src($email, $size, $rating))
+                  ->attributeUnless(is_null($alt), 'alt', $alt)
+                  ->attributes($attributes);
     }
 
     /**

@@ -225,20 +225,20 @@ class GravatarTest extends TestCase
         $hashed = md5($this->email);
 
         static::assertSame(
-            "<img src=\"https://secure.gravatar.com/avatar/$hashed?s=80&r=g&d=identicon\">",
-            $this->gravatar->image($this->email)
+            "<img src=\"https://secure.gravatar.com/avatar/{$hashed}?s=80&amp;r=g&amp;d=identicon\">",
+            $this->gravatar->image($this->email)->toHtml()
         );
 
         $alt = 'ARCANEDEV';
 
         static::assertSame(
-            "<img src=\"https://secure.gravatar.com/avatar/$hashed?s=80&r=g&d=identicon\" alt=\"$alt\">",
-            $this->gravatar->image($this->email, $alt)
+            "<img src=\"https://secure.gravatar.com/avatar/{$hashed}?s=80&amp;r=g&amp;d=identicon\" alt=\"{$alt}\">",
+            $this->gravatar->image($this->email, $alt)->toHtml()
         );
 
         static::assertSame(
-            "<img src=\"https://secure.gravatar.com/avatar/$hashed?s=80&r=g&d=identicon\" class=\"img-responsive\" alt=\"$alt\">",
-            $this->gravatar->image($this->email, $alt, ['class'  => 'img-responsive'])
+            "<img src=\"https://secure.gravatar.com/avatar/{$hashed}?s=80&amp;r=g&amp;d=identicon\" alt=\"{$alt}\" class=\"img-fluid\">",
+            $this->gravatar->image($this->email, $alt, ['class'  => 'img-fluid'])->toHtml()
         );
     }
 

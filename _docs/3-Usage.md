@@ -59,10 +59,10 @@ else {
 And last but not least, if you want to echo out the image:
 
 ```php
-echo gravatar()->image('your@email.com');
-echo gravatar()->image('your@email.com', 'Username');
-echo gravatar()->image('your@email.com', 'Username', ['class' => 'img-responsive']);
-echo gravatar()->image('your@email.com', 'Username', ['class' => 'img-responsive'], 'pg');
+echo gravatar()->image('your@email.com')->toHtml();
+echo gravatar()->image('your@email.com', 'Username')->toHtml();
+echo gravatar()->image('your@email.com', 'Username', ['class' => 'img-responsive'])->toHtml();
+echo gravatar()->image('your@email.com', 'Username', ['class' => 'img-responsive'], 'pg')->toHtml();
 ```
 
 ### Laravel
@@ -99,7 +99,7 @@ echo Gravatar::image('your@email.com');
 echo Gravatar::image('your@email.com', 'Your username', ['class' => 'img-responsive']);
 
 // Or
-echo Gravatar::image('your@email.com', 'Your username', [width' => 200, 'height' => 200]);
+echo Gravatar::image('your@email.com', 'Your username', ['width' => 200, 'height' => 200]);
 ```
 
  > For the blade engine use `{!! ... !!}` to echo out the images.
@@ -114,7 +114,7 @@ You can use the Gravatar Helper `gravatar()` instead of Facade, like this:
 // Changing the default image and the size on the fly (You can do this also with the facade).
 gravatar()->setDefaultImage('mm')->setSize(128); 
 
-echo gravatar()->image('your@email.com', 'Username');
+echo gravatar()->image('your@email.com', 'Username')->toHtml();
 ```
 
 ### API
