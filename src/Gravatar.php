@@ -13,6 +13,13 @@ use Illuminate\Support\Arr;
 class Gravatar implements Contracts\Gravatar
 {
     /* -----------------------------------------------------------------
+     |  Traits
+     | -----------------------------------------------------------------
+     */
+
+    use Concerns\HashEmail;
+
+    /* -----------------------------------------------------------------
      |  Constants
      | -----------------------------------------------------------------
      */
@@ -250,7 +257,7 @@ class Gravatar implements Contracts\Gravatar
         $url  = $this->isSecured() ? static::SECURE_URL : static::BASE_URL;
         $url .= empty($email)
             ? str_repeat('0', 32)
-            : ($hash ? $this->hashEmail($email) : $email);
+            : ($hash ? static::hashEmail($email) : $email);
 
         $params = $this->getParams($email);
 
@@ -281,6 +288,19 @@ class Gravatar implements Contracts\Gravatar
                   ->src($this->src($email, $size, $rating))
                   ->attributeUnless(is_null($alt), 'alt', $alt)
                   ->attributes($attributes);
+    }
+
+    /**
+     * Get profile's data.
+     *
+     * @param  string      $email
+     * @param  mixed|null  $default
+     *
+     * @return array|mixed
+     */
+    public function profile($email, $default = null)
+    {
+        return (new Profile)->get($email, $default);
     }
 
     /**
@@ -321,18 +341,6 @@ class Gravatar implements Contracts\Gravatar
         $headers = get_headers($this->get($email), 1);
 
         return strpos($headers[0], '200') ? true : false;
-    }
-
-    /**
-     * Get a hashed email.
-     *
-     * @param  string  $email
-     *
-     * @return string
-     */
-    public function hashEmail($email)
-    {
-        return hash('md5', strtolower(trim($email)));
     }
 
     /* -----------------------------------------------------------------

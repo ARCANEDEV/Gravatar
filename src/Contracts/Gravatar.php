@@ -113,6 +113,16 @@ interface Gravatar
     public function image($email, $alt = null, array $attributes = [], $rating = null);
 
     /**
+     * Get profile's data.
+     *
+     * @param  string      $email
+     * @param  mixed|null  $default
+     *
+     * @return array|mixed
+     */
+    public function profile($email, $default = null);
+
+    /**
      * Enable the use of the secure protocol for image URLs.
      *
      * @return self
@@ -142,5 +152,5 @@ interface Gravatar
      *
      * @return string
      */
-    public function hashEmail($email);
+    public static function hashEmail($email);
 }
