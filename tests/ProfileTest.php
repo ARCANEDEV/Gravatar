@@ -23,14 +23,14 @@ class ProfileTest extends TestCase
      | -----------------------------------------------------------------
      */
 
-    public function setUp()
+    public function setUp(): void
     {
         parent::setUp();
 
         $this->profile = new Profile;
     }
 
-    protected function tearDown()
+    protected function tearDown(): void
     {
         unset($this->profile);
 
@@ -82,14 +82,12 @@ class ProfileTest extends TestCase
         );
     }
 
-    /**
-     * @test
-     *
-     * @expectedException         \Arcanedev\Gravatar\Exceptions\InvalidProfileFormatException
-     * @expectedExceptionMessage  The format [csv] is invalid, the supported formats are: json, xml, php, vcf, qr
-     */
+    /** @test */
     public function it_must_throw_an_exception_on_invalid_format()
     {
+        $this->expectException(\Arcanedev\Gravatar\Exceptions\InvalidProfileFormatException::class);
+        $this->expectExceptionMessage('The format [csv] is invalid, the supported formats are: json, xml, php, vcf, qr');
+
         $this->profile->setFormat('csv');
     }
 }
