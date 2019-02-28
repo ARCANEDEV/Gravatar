@@ -281,6 +281,16 @@ class GravatarTest extends TestCase
         static::assertSame(256, $this->gravatar->getSize());
     }
 
+    /** @test */
+    public function it_get_profile()
+    {
+        $data = $this->gravatar->profile('arcanedev.maroc@gmail.com');
+
+        static::assertIsArray($data);
+        static::assertArrayHasKey('entry', $data);
+        static::assertCount(1, $data['entry']);
+    }
+
     /* -----------------------------------------------------------------
      |  Other Methods
      | -----------------------------------------------------------------
