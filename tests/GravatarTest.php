@@ -23,14 +23,14 @@ class GravatarTest extends TestCase
      | -----------------------------------------------------------------
      */
 
-    public function setUp()
+    public function setUp(): void
     {
         parent::setUp();
 
         $this->gravatar = $this->app->make(\Arcanedev\Gravatar\Contracts\Gravatar::class);
     }
 
-    public function tearDown()
+    public function tearDown(): void
     {
         unset($this->gravatar);
 
@@ -69,47 +69,39 @@ class GravatarTest extends TestCase
         }
     }
 
-    /**
-     * @test
-     *
-     * @expectedException        \Arcanedev\Gravatar\Exceptions\InvalidImageSizeException
-     * @expectedExceptionMessage Avatar size specified must be an integer.
-     */
+    /** @test */
     public function it_must_throw_an_invalid_image_size_exception_on_type()
     {
+        $this->expectException(\Arcanedev\Gravatar\Exceptions\InvalidImageSizeException::class);
+        $this->expectExceptionMessage('Avatar size specified must be an integer.');
+
         $this->gravatar->setSize('xl');
     }
 
-    /**
-     * @test
-     *
-     * @expectedException        \Arcanedev\Gravatar\Exceptions\InvalidImageSizeException
-     * @expectedExceptionMessage Avatar size must be within 0 pixels and 512 pixels.
-     */
+    /** @test */
     public function it_must_throw_an_invalid_image_size_exception_on_min_and_max()
     {
+        $this->expectException(\Arcanedev\Gravatar\Exceptions\InvalidImageSizeException::class);
+        $this->expectExceptionMessage('Avatar size must be within 0 pixels and 512 pixels.');
+
         $this->gravatar->setSize(513);
     }
 
-    /**
-     * @test
-     *
-     * @expectedException        \Arcanedev\Gravatar\Exceptions\InvalidImageRatingException
-     * @expectedExceptionMessage Invalid rating 'mature' specified, only 'g', 'pg', 'r' or 'x' are supported.
-     */
+    /** @test */
     public function it_must_throw_an_invalid_rating_exception()
     {
+        $this->expectException(\Arcanedev\Gravatar\Exceptions\InvalidImageRatingException::class);
+        $this->expectExceptionMessage("Invalid rating 'mature' specified, only 'g', 'pg', 'r' or 'x' are supported.");
+
         $this->gravatar->setRating('mature');
     }
 
-    /**
-     * @test
-     *
-     * @expectedException        \Arcanedev\Gravatar\Exceptions\InvalidImageUrlException
-     * @expectedExceptionMessage The default image specified is not a recognized gravatar "default" and is not a valid URL
-     */
+    /** @test */
     public function it_must_throw_invalid_image_url_on_setting_default_image()
     {
+        $this->expectException(\Arcanedev\Gravatar\Exceptions\InvalidImageUrlException::class);
+        $this->expectExceptionMessage('The default image specified is not a recognized gravatar "default" and is not a valid URL');
+
         new Gravatar('hello.com/img.png');
     }
 
