@@ -72,14 +72,18 @@ class Gravatar implements Contracts\Gravatar
      *
      * @var array
      */
-    private $supportedImages    = ['404', 'mm', 'identicon', 'monsterid', 'wavatar', 'retro'];
+    private $supportedImages    = [
+        '404', 'mp', 'identicon', 'monsterid', 'wavatar', 'retro', 'robohash', 'blank',
+    ];
 
     /**
      * Supported image ratings.
      *
      * @var array
      */
-    private $supportedRatings   = ['g', 'pg', 'r', 'x'];
+    private $supportedRatings   = [
+        'g', 'pg', 'r', 'x'
+    ];
 
     /* -----------------------------------------------------------------
      |  Constructor
@@ -93,7 +97,7 @@ class Gravatar implements Contracts\Gravatar
      * @param  int     $size
      * @param  string  $rating
      */
-    public function __construct($default = 'mm', $size = 80, $rating = 'g')
+    public function __construct($default = 'blank', $size = 80, $rating = 'g')
     {
         $this->setDefaultImage($default);
         $this->setSize($size);
@@ -360,7 +364,7 @@ class Gravatar implements Contracts\Gravatar
     private function checkImageUrl($image)
     {
         if ( ! filter_var($image, FILTER_VALIDATE_URL)) {
-            throw Exceptions\InvalidImageUrlException::make();
+            throw Exceptions\InvalidImageUrlException::make($image);
         }
 
         return $image;

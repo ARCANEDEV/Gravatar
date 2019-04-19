@@ -10,10 +10,10 @@ use InvalidArgumentException;
  */
 class InvalidImageUrlException extends InvalidArgumentException
 {
-    public static function make()
+    public static function make($image)
     {
         return new static(
-            'The default image specified is not a recognized gravatar "default" and is not a valid URL'
+            "The default image specified is not a recognized gravatar `default` and is not a valid URL: `{$image}`"
         );
     }
 }

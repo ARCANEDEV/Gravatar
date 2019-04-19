@@ -1,5 +1,6 @@
 <?php namespace Arcanedev\Gravatar\Tests;
 
+use Arcanedev\Gravatar\Exceptions\InvalidImageUrlException;
 use Arcanedev\Gravatar\Gravatar;
 
 /**
@@ -97,10 +98,10 @@ class GravatarTest extends TestCase
     }
 
     /** @test */
-    public function it_must_throw_invalid_image_url_on_setting_default_image()
+    public function it_must_throw_invalid_image_url_when_setting_default_image()
     {
         $this->expectException(\Arcanedev\Gravatar\Exceptions\InvalidImageUrlException::class);
-        $this->expectExceptionMessage('The default image specified is not a recognized gravatar "default" and is not a valid URL');
+        $this->expectExceptionMessage('The default image specified is not a recognized gravatar `default` and is not a valid URL: `hello.com/img.png`');
 
         new Gravatar('hello.com/img.png');
     }
@@ -281,6 +282,36 @@ class GravatarTest extends TestCase
         static::assertIsArray($data);
         static::assertArrayHasKey('entry', $data);
         static::assertCount(1, $data['entry']);
+    }
+
+    /** @test */
+    public function it_can_check_if_image_type_is_supported()
+    {
+        $types = [
+            '404',
+            'mp',
+            'identicon',
+            'monsterid',
+            'wavatar',
+            'retro',
+            'robohash',
+            'blank',
+        ];
+
+        foreach ($types as $type) {
+            $this->gravatar->setDefaultImage($type);
+
+            static::assertSame($type, $this->gravatar->getDefaultImage());
+        }
+    }
+
+    /** @test */
+    public function it_must_throw_exception_when_default_image_not_supported()
+    {
+        $this->expectException(InvalidImageUrlException::class);
+        $this->expectExceptionMessage('The default image specified is not a recognized gravatar `default` and is not a valid URL: `github`');
+
+        $this->gravatar->setDefaultImage('github');
     }
 
     /* -----------------------------------------------------------------
