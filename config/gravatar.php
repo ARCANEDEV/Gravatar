@@ -9,7 +9,7 @@ return [
      | -----------------------------------------------------------------
      |  The default avatar to display if we have no results.
      |
-     |  Supported: 'identicon', '404', 'mm', 'monsterid', 'wavatar', 'retro', false
+     |  Supported: 'identicon', '404', 'mp', 'monsterid', 'wavatar', 'retro', 'robohash', 'blank', false
      */
 
     'default' => 'identicon',
