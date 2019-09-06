@@ -5,12 +5,6 @@
   1. [Installation and Setup](1-Installation-and-Setup.md)
   2. [Configuration](2-Configuration.md)
   3. [Usage](3-Usage.md)
-
-## Server Requirements
-
-The Gravatar package has a few system requirements:
-
-    - PHP >= 7.1.3
     
 ## Version Compatibility
 
@@ -22,6 +16,7 @@ The Gravatar package has a few system requirements:
 | ![Gravatar v2.2.x][gravatar_2_2] | ![Laravel v5.6][laravel_5_6]                                                                                        |
 | ![Gravatar v2.3.x][gravatar_2_3] | ![Laravel v5.7][laravel_5_7]                                                                                        |
 | ![Gravatar v2.4.x][gravatar_2_4] | ![Laravel v5.8][laravel_5_8]                                                                                        |
+| ![Gravatar v3.0.x][gravatar_3_0] | ![Laravel v6.0][laravel_6_0]                                                                                        |
 
 > **Note :** This is a framework-agnostic package, so you can use any version of this package in your PHP project.
 
@@ -34,6 +29,7 @@ The Gravatar package has a few system requirements:
 [laravel_5_6]:    https://img.shields.io/badge/v5.6-supported-brightgreen.svg?style=flat-square "Laravel v5.6"
 [laravel_5_7]:    https://img.shields.io/badge/v5.7-supported-brightgreen.svg?style=flat-square "Laravel v5.7"
 [laravel_5_8]:    https://img.shields.io/badge/v5.8-supported-brightgreen.svg?style=flat-square "Laravel v5.8"
+[laravel_6_0]:    https://img.shields.io/badge/v6.0-supported-brightgreen.svg?style=flat-square "Laravel v6.0"
 
 [gravatar_1_x]: https://img.shields.io/badge/version-1.*-blue.svg?style=flat-square "Gravatar v1.*"
 [gravatar_2_0]: https://img.shields.io/badge/version-2.0.*-blue.svg?style=flat-square "Gravatar v2.0.*"
@@ -41,6 +37,7 @@ The Gravatar package has a few system requirements:
 [gravatar_2_2]: https://img.shields.io/badge/version-2.2.*-blue.svg?style=flat-square "Gravatar v2.2.*"
 [gravatar_2_3]: https://img.shields.io/badge/version-2.3.*-blue.svg?style=flat-square "Gravatar v2.3.*"
 [gravatar_2_4]: https://img.shields.io/badge/version-2.4.*-blue.svg?style=flat-square "Gravatar v2.4.*"
+[gravatar_3_0]: https://img.shields.io/badge/version-3.0.*-blue.svg?style=flat-square "Gravatar v3.0.*"
 
 ## Composer
 
@@ -56,15 +53,6 @@ Once the package is installed, you can register the service provider in `config/
 'providers' => [
     ...
     Arcanedev\Gravatar\GravatarServiceProvider::class,
-],
-```
-
-**Optional :** Alias the Gravatar facade by adding it to the aliases array in the `config/app.php` file.
-
-```php
-'aliases' => [
-    // ...
-    'Gravatar' => Arcanedev\Gravatar\Facades\Gravatar::class,
 ],
 ```
 

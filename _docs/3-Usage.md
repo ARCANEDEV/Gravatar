@@ -59,19 +59,19 @@ else {
 And last but not least, if you want to echo out the image:
 
 ```php
-echo gravatar()->image('your@email.com')->toHtml();
-echo gravatar()->image('your@email.com', 'Username')->toHtml();
-echo gravatar()->image('your@email.com', 'Username', ['class' => 'img-responsive'])->toHtml();
-echo gravatar()->image('your@email.com', 'Username', ['class' => 'img-responsive'], 'pg')->toHtml();
+echo $gravatar->image('your@email.com')->toHtml();
+echo $gravatar->image('your@email.com', 'Username')->toHtml();
+echo $gravatar->image('your@email.com', 'Username', ['class' => 'img-responsive'])->toHtml();
+echo $gravatar->image('your@email.com', 'Username', ['class' => 'img-responsive'], 'pg')->toHtml();
 ```
 
 ### Laravel
 
-#### Gravatar::exists($email)
+#### gravatar()->exists($email)
 
 Returns a boolean telling if has a gravatar of the given `$email`.
 
-#### Gravatar::src($email, $size = null, $rating = null)
+#### gravatar()->src($email, $size = null, $rating = null)
 
 Returns the https URL for the Gravatar of the specified email address.
 
@@ -79,13 +79,13 @@ Can optionally pass in the size required as an integer (range between 1 - 512).
 
 ```html
 <!-- Show image with default dimensions -->
-<img src="{{ Gravatar::src('your@email.com') }}">
+<img src="{{ gravatar()->src('your@email.com') }}">
 
 <!-- Show image at 256px -->
-<img src="{{ Gravatar::src('your@email.com', 256) }}">
+<img src="{{ gravatar()->src('your@email.com', 256) }}">
 ```
 
-#### Gravatar::image($email, $alt = null, $attributes = [], $rating = null)
+#### gravatar()->image($email, $alt = null, $attributes = [], $rating = null)
 
 Returns the HTML for an `<img>` tag
 
@@ -93,29 +93,16 @@ Returns the HTML for an `<img>` tag
 <?php
 
 // Show image with default dimensions
-echo Gravatar::image('your@email.com');
+echo gravatar()->image('your@email.com');
 
 // Adding attributes
-echo Gravatar::image('your@email.com', 'Your username', ['class' => 'img-responsive']);
+echo gravatar()->image('your@email.com', 'Your username', ['class' => 'img-responsive']);
 
 // Or
-echo Gravatar::image('your@email.com', 'Your username', ['width' => 200, 'height' => 200]);
+echo gravatar()->image('your@email.com', 'Your username', ['width' => 200, 'height' => 200]);
 ```
 
  > For the blade engine use `{!! ... !!}` to echo out the images.
-
-#### gravatar() Helper
-
-You can use the Gravatar Helper `gravatar()` instead of Facade, like this:
- 
-```php
-<?php
-
-// Changing the default image and the size on the fly (You can do this also with the facade).
-gravatar()->setDefaultImage('mm')->setSize(128); 
-
-echo gravatar()->image('your@email.com', 'Username')->toHtml();
-```
 
 ### API
 
