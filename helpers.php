@@ -1,13 +1,15 @@
 <?php
 
+use Arcanedev\Gravatar\Contracts\Gravatar;
+
 if ( ! function_exists('gravatar')) {
     /**
      * Get the gravatar instance.
      *
      * @return Arcanedev\Gravatar\Contracts\Gravatar
      */
-    function gravatar()
+    function gravatar(): Gravatar
     {
-        return app(Arcanedev\Gravatar\Contracts\Gravatar::class);
+        return app(Gravatar::class);
     }
 }

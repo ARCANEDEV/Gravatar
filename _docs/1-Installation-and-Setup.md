@@ -16,7 +16,7 @@
 | ![Gravatar v2.2.x][gravatar_2_2] | ![Laravel v5.6][laravel_5_6]                                                                                        |
 | ![Gravatar v2.3.x][gravatar_2_3] | ![Laravel v5.7][laravel_5_7]                                                                                        |
 | ![Gravatar v2.4.x][gravatar_2_4] | ![Laravel v5.8][laravel_5_8]                                                                                        |
-| ![Gravatar v3.0.x][gravatar_3_0] | ![Laravel v6.0][laravel_6_0]                                                                                        |
+| ![Gravatar v3.0.x][gravatar_3_x] | ![Laravel v6.0][laravel_6_x]                                                                                        |
 
 > **Note :** This is a framework-agnostic package, so you can use any version of this package in your PHP project.
 
@@ -29,15 +29,15 @@
 [laravel_5_6]:    https://img.shields.io/badge/v5.6-supported-brightgreen.svg?style=flat-square "Laravel v5.6"
 [laravel_5_7]:    https://img.shields.io/badge/v5.7-supported-brightgreen.svg?style=flat-square "Laravel v5.7"
 [laravel_5_8]:    https://img.shields.io/badge/v5.8-supported-brightgreen.svg?style=flat-square "Laravel v5.8"
-[laravel_6_0]:    https://img.shields.io/badge/v6.0-supported-brightgreen.svg?style=flat-square "Laravel v6.0"
+[laravel_6_x]:    https://img.shields.io/badge/v6.x-supported-brightgreen.svg?style=flat-square "Laravel v6.x"
 
-[gravatar_1_x]: https://img.shields.io/badge/version-1.*-blue.svg?style=flat-square "Gravatar v1.*"
-[gravatar_2_0]: https://img.shields.io/badge/version-2.0.*-blue.svg?style=flat-square "Gravatar v2.0.*"
-[gravatar_2_1]: https://img.shields.io/badge/version-2.1.*-blue.svg?style=flat-square "Gravatar v2.1.*"
-[gravatar_2_2]: https://img.shields.io/badge/version-2.2.*-blue.svg?style=flat-square "Gravatar v2.2.*"
-[gravatar_2_3]: https://img.shields.io/badge/version-2.3.*-blue.svg?style=flat-square "Gravatar v2.3.*"
-[gravatar_2_4]: https://img.shields.io/badge/version-2.4.*-blue.svg?style=flat-square "Gravatar v2.4.*"
-[gravatar_3_0]: https://img.shields.io/badge/version-3.0.*-blue.svg?style=flat-square "Gravatar v3.0.*"
+[gravatar_1_x]: https://img.shields.io/badge/version-1.x-blue.svg?style=flat-square "Gravatar v1.x"
+[gravatar_2_0]: https://img.shields.io/badge/version-2.0.x-blue.svg?style=flat-square "Gravatar v2.0.x"
+[gravatar_2_1]: https://img.shields.io/badge/version-2.1.x-blue.svg?style=flat-square "Gravatar v2.1.x"
+[gravatar_2_2]: https://img.shields.io/badge/version-2.2.x-blue.svg?style=flat-square "Gravatar v2.2.x"
+[gravatar_2_3]: https://img.shields.io/badge/version-2.3.x-blue.svg?style=flat-square "Gravatar v2.3.x"
+[gravatar_2_4]: https://img.shields.io/badge/version-2.4.x-blue.svg?style=flat-square "Gravatar v2.4.x"
+[gravatar_3_x]: https://img.shields.io/badge/version-3.x-blue.svg?style=flat-square "Gravatar v3.x"
 
 ## Composer
 

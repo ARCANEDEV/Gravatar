@@ -1,6 +1,7 @@
 <?php namespace Arcanedev\Gravatar;
 
-use Arcanedev\Support\PackageServiceProvider as ServiceProvider;
+use Arcanedev\Support\Providers\PackageServiceProvider;
+use Illuminate\Contracts\Support\DeferrableProvider;
 
 /**
  * Class     GravatarServiceProvider
@@ -8,7 +9,7 @@ use Arcanedev\Support\PackageServiceProvider as ServiceProvider;
  * @package  Arcanedev\Gravatar
  * @author   ARCANEDEV <arcanedev.maroc@gmail.com>
  */
-class GravatarServiceProvider extends ServiceProvider
+class GravatarServiceProvider extends PackageServiceProvider implements DeferrableProvider
 {
     /* -----------------------------------------------------------------
      |  Properties
@@ -22,13 +23,6 @@ class GravatarServiceProvider extends ServiceProvider
      */
     protected $package = 'gravatar';
 
-    /**
-     * Indicates if loading of the provider is deferred.
-     *
-     * @var bool
-     */
-    protected $defer   = true;
-
     /* -----------------------------------------------------------------
      |  Main Methods
      | -----------------------------------------------------------------
@@ -37,20 +31,17 @@ class GravatarServiceProvider extends ServiceProvider
     /**
      * Register the service provider.
      */
-    public function register()
+    public function register(): void
     {
         parent::register();
 
         $this->registerConfig();
 
         $this->singleton(Contracts\Gravatar::class, function($app) {
-            /** @var  \Illuminate\Contracts\Config\Repository  $config */
-            $config = $app['config'];
-
             return new Gravatar(
-                $config->get('gravatar.default', 'mm'),
-                $config->get('gravatar.size', 80),
-                $config->get('gravatar.max-rating', 'g')
+                $app['config']->get('gravatar.default', 'mm'),
+                $app['config']->get('gravatar.size', 80),
+                $app['config']->get('gravatar.max-rating', 'g')
             );
         });
     }
@@ -58,10 +49,8 @@ class GravatarServiceProvider extends ServiceProvider
     /**
      * Boot the service provider.
      */
-    public function boot()
+    public function boot(): void
     {
-        parent::boot();
-
         $this->publishConfig();
     }
 
@@ -70,7 +59,7 @@ class GravatarServiceProvider extends ServiceProvider
      *
      * @return array
      */
-    public function provides()
+    public function provides(): array
     {
         return [
             Contracts\Gravatar::class,

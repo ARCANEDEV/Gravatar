@@ -348,29 +348,6 @@ class Gravatar implements Contracts\Gravatar
     }
 
     /* -----------------------------------------------------------------
-     |  Check Methods
-     | -----------------------------------------------------------------
-     */
-
-    /**
-     * Check image url.
-     *
-     * @param  string  $image
-     *
-     * @return string
-     *
-     * @throws \Arcanedev\Gravatar\Exceptions\InvalidImageUrlException
-     */
-    private function checkImageUrl($image)
-    {
-        if ( ! filter_var($image, FILTER_VALIDATE_URL)) {
-            throw Exceptions\InvalidImageUrlException::make($image);
-        }
-
-        return $image;
-    }
-
-    /* -----------------------------------------------------------------
      |  Other Methods
      | -----------------------------------------------------------------
      */
@@ -382,7 +359,7 @@ class Gravatar implements Contracts\Gravatar
      *
      * @return array
      */
-    private function getParams($email)
+    private function getParams(string $email): array
     {
         $params = $this->cachedParams;
 
@@ -402,6 +379,24 @@ class Gravatar implements Contracts\Gravatar
         }
 
         return (array) $params;
+    }
+
+    /**
+     * Check image url.
+     *
+     * @param  string  $image
+     *
+     * @return string
+     *
+     * @throws \Arcanedev\Gravatar\Exceptions\InvalidImageUrlException
+     */
+    private function checkImageUrl(string $image)
+    {
+        if ( ! filter_var($image, FILTER_VALIDATE_URL)) {
+            throw Exceptions\InvalidImageUrlException::make($image);
+        }
+
+        return $image;
     }
 
     /**
