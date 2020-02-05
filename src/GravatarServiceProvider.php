@@ -1,4 +1,8 @@
-<?php namespace Arcanedev\Gravatar;
+<?php
+
+declare(strict_types=1);
+
+namespace Arcanedev\Gravatar;
 
 use Arcanedev\Support\Providers\PackageServiceProvider;
 use Illuminate\Contracts\Support\DeferrableProvider;

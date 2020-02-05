@@ -1,4 +1,8 @@
-<?php namespace Arcanedev\Gravatar\Exceptions;
+<?php
+
+declare(strict_types=1);
+
+namespace Arcanedev\Gravatar\Exceptions;
 
 use InvalidArgumentException;
 
@@ -10,6 +14,16 @@ use InvalidArgumentException;
  */
 class InvalidImageRatingException extends InvalidArgumentException
 {
+    /* -----------------------------------------------------------------
+     |  Main Methods
+     | -----------------------------------------------------------------
+     */
+
+    /**
+     * @param  string  $rating
+     *
+     * @return static
+     */
     public static function make(string $rating)
     {
         return new static(

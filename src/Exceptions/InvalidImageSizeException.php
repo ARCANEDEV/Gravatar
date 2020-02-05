@@ -1,4 +1,8 @@
-<?php namespace Arcanedev\Gravatar\Exceptions;
+<?php
+
+declare(strict_types=1);
+
+namespace Arcanedev\Gravatar\Exceptions;
 
 use InvalidArgumentException;
 

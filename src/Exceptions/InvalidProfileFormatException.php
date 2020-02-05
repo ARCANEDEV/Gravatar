@@ -1,4 +1,8 @@
-<?php namespace Arcanedev\Gravatar\Exceptions;
+<?php
+
+declare(strict_types=1);
+
+namespace Arcanedev\Gravatar\Exceptions;
 
 /**
  * Class     InvalidProfileFormatException
@@ -8,6 +12,11 @@
  */
 class InvalidProfileFormatException extends \InvalidArgumentException
 {
+    /* -----------------------------------------------------------------
+     |  Main Methods
+     | -----------------------------------------------------------------
+     */
+
     /**
      * Make a new exception.
      *
@@ -16,7 +25,7 @@ class InvalidProfileFormatException extends \InvalidArgumentException
      *
      * @return \Arcanedev\Gravatar\Exceptions\InvalidProfileFormatException
      */
-    public static function make($format, array $supportedFormat)
+    public static function make(string $format, array $supportedFormat)
     {
         return new static(
             sprintf(

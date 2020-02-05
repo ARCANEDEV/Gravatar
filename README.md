@@ -1,6 +1,6 @@
 # Gravatar [![Packagist License][badge_license]](LICENSE.md) [![For PHP][badge_php]][link-github-repo] [![Laravel 5 Supported][badge_laravel]][link-github-repo]
 
-[![Travis Status][badge_build]][link-travis]
+[![Github Workflow Status][badge_build]][link-github-status]
 [![Coverage Status][badge_coverage]][link-scrutinizer]
 [![Scrutinizer Code Quality][badge_quality]][link-scrutinizer]
 [![SensioLabs Insight][badge_insight]][link-insight]
@@ -41,7 +41,7 @@ Any ideas are welcome. Feel free to submit any issues or pull requests, please c
 
 [badge_license]:      http://img.shields.io/packagist/l/arcanedev/gravatar.svg?style=flat-square
 [badge_php]:          https://img.shields.io/badge/PHP-Framework%20agnostic-4F5B93.svg?style=flat-square
-[badge_build]:        http://img.shields.io/travis/ARCANEDEV/Gravatar.svg?style=flat-square
+[badge_build]:     https://img.shields.io/github/workflow/status/ARCANEDEV/Gravatar/run-tests?style=flat-square
 [badge_coverage]:     https://img.shields.io/scrutinizer/coverage/g/ARCANEDEV/Gravatar.svg?style=flat-square
 [badge_quality]:      https://img.shields.io/scrutinizer/g/ARCANEDEV/Gravatar.svg?style=flat-square
 [badge_insight]:      https://img.shields.io/sensiolabs/i/b295ae87-bc10-4a43-9ca4-fbeab5c7fcda.svg?style=flat-square
@@ -53,9 +53,9 @@ Any ideas are welcome. Feel free to submit any issues or pull requests, please c
 
 [link-author]:        https://github.com/arcanedev-maroc
 [link-github-repo]:   https://github.com/ARCANEDEV/Gravatar
+[link-github-status]: https://github.com/ARCANEDEV/Gravatar/actions
 [link-github-issues]: https://github.com/ARCANEDEV/Gravatar/issues
 [link-contributors]:  https://github.com/ARCANEDEV/Gravatar/graphs/contributors
 [link-packagist]:     https://packagist.org/packages/arcanedev/gravatar
-[link-travis]:        https://travis-ci.org/ARCANEDEV/Gravatar
 [link-scrutinizer]:   https://scrutinizer-ci.com/g/ARCANEDEV/Gravatar/?branch=master
 [link-insight]:       https://insight.sensiolabs.com/projects/b295ae87-bc10-4a43-9ca4-fbeab5c7fcda

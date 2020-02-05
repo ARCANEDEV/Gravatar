@@ -1,4 +1,8 @@
-<?php namespace Arcanedev\Gravatar\Helpers;
+<?php
+
+declare(strict_types=1);
+
+namespace Arcanedev\Gravatar\Helpers;
 
 /**
  * Class     NumberChecker
@@ -22,7 +26,7 @@ class NumberChecker
      *
      * @return bool
      */
-    public static function isIntBetween($value, $min, $max)
+    public static function isIntBetween(int $value, int $min, int $max): bool
     {
         return $value >= $min && $value <= $max;
     }
@@ -34,7 +38,7 @@ class NumberChecker
      *
      * @return bool
      */
-    public static function isIntValue($value)
+    public static function isIntValue($value): bool
     {
         return is_int($value) || ctype_digit($value);
     }
