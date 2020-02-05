@@ -1,4 +1,8 @@
-<?php namespace Arcanedev\Gravatar\Tests;
+<?php
+
+declare(strict_types=1);
+
+namespace Arcanedev\Gravatar\Tests;
 
 use Arcanedev\Gravatar\GravatarServiceProvider;
 
@@ -43,7 +47,7 @@ class GravatarServiceProviderTest extends TestCase
      */
 
     /** @test */
-    public function it_can_be_instantiated()
+    public function it_can_be_instantiated(): void
     {
         $expectations = [
             \Illuminate\Support\ServiceProvider::class,
@@ -59,7 +63,7 @@ class GravatarServiceProviderTest extends TestCase
     }
 
     /** @test */
-    public function it_can_provides()
+    public function it_can_provides(): void
     {
         $expected = [
             \Arcanedev\Gravatar\Contracts\Gravatar::class,

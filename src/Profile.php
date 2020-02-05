@@ -1,4 +1,8 @@
-<?php namespace Arcanedev\Gravatar;
+<?php
+
+declare(strict_types=1);
+
+namespace Arcanedev\Gravatar;
 
 use Arcanedev\Gravatar\Exceptions\InvalidProfileFormatException;
 
@@ -54,7 +58,7 @@ class Profile
      *
      * @return string|null
      */
-    public function getFormat()
+    public function getFormat(): ?string
     {
         return $this->format;
     }
@@ -62,11 +66,11 @@ class Profile
     /**
      * Set the profile's format.
      *
-     * @param  string  $format
+     * @param  string|null  $format
      *
      * @return \Arcanedev\Gravatar\Profile
      */
-    public function setFormat($format = null)
+    public function setFormat(string $format = null)
     {
         if ( ! is_null($format)) {
             self::checkFormat($format);
@@ -84,13 +88,13 @@ class Profile
     /**
      * Build the profile URL based on the provided email address.
      *
-     * @param  string  $email
-     * @param  array   $params
-     * @param  bool    $secure
+     * @param  string|null  $email
+     * @param  array        $params
+     * @param  bool         $secure
      *
      * @return string
      */
-    public function getUrl($email = null, array $params = [], $secure = true)
+    public function getUrl(string $email = null, array $params = [], bool $secure = true): string
     {
         $url  = $secure ? static::SECURE_URL : static::BASE_URL;
         $url .= is_null($email)
@@ -114,7 +118,7 @@ class Profile
      *
      * @return array|mixed
      */
-    public function get($email, $default = null)
+    public function get(string $email, $default = null)
     {
         $this->setFormat('php');
 
@@ -137,7 +141,7 @@ class Profile
      *
      * @return bool
      */
-    public function hasFormat()
+    public function hasFormat(): bool
     {
         return ! is_null($this->format);
     }
@@ -147,7 +151,7 @@ class Profile
      *
      * @param  string  $format
      */
-    private static function checkFormat(&$format)
+    private static function checkFormat(string &$format): void
     {
         $format = strtolower($format);
 

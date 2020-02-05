@@ -1,4 +1,8 @@
-<?php namespace Arcanedev\Gravatar\Tests;
+<?php
+
+declare(strict_types=1);
+
+namespace Arcanedev\Gravatar\Tests;
 
 use Orchestra\Testbench\TestCase as BaseTestCase;
 
@@ -46,24 +50,10 @@ abstract class TestCase extends BaseTestCase
      *
      * @return array
      */
-    protected function getPackageProviders($app)
+    protected function getPackageProviders($app): array
     {
         return [
             \Arcanedev\Gravatar\GravatarServiceProvider::class,
-        ];
-    }
-
-    /**
-     * Get package aliases.
-     *
-     * @param  \Illuminate\Foundation\Application  $app
-     *
-     * @return array
-     */
-    protected function getPackageAliases($app)
-    {
-        return [
-            'Gravatar' => \Arcanedev\Gravatar\Facades\Gravatar::class,
         ];
     }
 }

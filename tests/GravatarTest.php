@@ -1,5 +1,7 @@
 <?php namespace Arcanedev\Gravatar\Tests;
 
+use Arcanedev\Gravatar\Exceptions\InvalidImageRatingException;
+use Arcanedev\Gravatar\Exceptions\InvalidImageSizeException;
 use Arcanedev\Gravatar\Exceptions\InvalidImageUrlException;
 use Arcanedev\Gravatar\Gravatar;
 
@@ -44,7 +46,7 @@ class GravatarTest extends TestCase
      */
 
     /** @test */
-    public function it_can_be_instantiated()
+    public function it_can_be_instantiated(): void
     {
         static::assertGravatarInstance($this->gravatar);
 
@@ -58,7 +60,7 @@ class GravatarTest extends TestCase
     }
 
     /** @test */
-    public function it_can_set_and_get_image_size()
+    public function it_can_set_and_get_image_size(): void
     {
         $mix = 0;
         $max = 512;
@@ -71,43 +73,43 @@ class GravatarTest extends TestCase
     }
 
     /** @test */
-    public function it_must_throw_an_invalid_image_size_exception_on_type()
+    public function it_must_throw_an_invalid_image_size_exception_on_type(): void
     {
-        $this->expectException(\Arcanedev\Gravatar\Exceptions\InvalidImageSizeException::class);
+        $this->expectException(InvalidImageSizeException::class);
         $this->expectExceptionMessage('Avatar size specified must be an integer.');
 
         $this->gravatar->setSize('xl');
     }
 
     /** @test */
-    public function it_must_throw_an_invalid_image_size_exception_on_min_and_max()
+    public function it_must_throw_an_invalid_image_size_exception_on_min_and_max(): void
     {
-        $this->expectException(\Arcanedev\Gravatar\Exceptions\InvalidImageSizeException::class);
+        $this->expectException(InvalidImageSizeException::class);
         $this->expectExceptionMessage('Avatar size must be within 0 pixels and 512 pixels.');
 
         $this->gravatar->setSize(513);
     }
 
     /** @test */
-    public function it_must_throw_an_invalid_rating_exception()
+    public function it_must_throw_an_invalid_rating_exception(): void
     {
-        $this->expectException(\Arcanedev\Gravatar\Exceptions\InvalidImageRatingException::class);
+        $this->expectException(InvalidImageRatingException::class);
         $this->expectExceptionMessage("Invalid rating 'mature' specified, only 'g', 'pg', 'r' or 'x' are supported.");
 
         $this->gravatar->setRating('mature');
     }
 
     /** @test */
-    public function it_must_throw_invalid_image_url_when_setting_default_image()
+    public function it_must_throw_invalid_image_url_when_setting_default_image(): void
     {
-        $this->expectException(\Arcanedev\Gravatar\Exceptions\InvalidImageUrlException::class);
+        $this->expectException(InvalidImageUrlException::class);
         $this->expectExceptionMessage('The default image specified is not a recognized gravatar `default` and is not a valid URL: `hello.com/img.png`');
 
         new Gravatar('hello.com/img.png');
     }
 
     /** @test */
-    public function it_can_set_and_get_default_image_url()
+    public function it_can_set_and_get_default_image_url(): void
     {
         $this->gravatar = new Gravatar('http://www.hello.com/img.png');
 
@@ -125,7 +127,7 @@ class GravatarTest extends TestCase
     }
 
     /** @test */
-    public function it_can_disable_and_enable_the_secure_url()
+    public function it_can_disable_and_enable_the_secure_url(): void
     {
         static::assertTrue($this->gravatar->isSecured());
 
@@ -139,7 +141,7 @@ class GravatarTest extends TestCase
     }
 
     /** @test */
-    public function it_can_hash_email()
+    public function it_can_hash_email(): void
     {
         $emails = [
             $this->email,
@@ -159,7 +161,7 @@ class GravatarTest extends TestCase
     }
 
     /** @test */
-    public function it_can_get_gravatar_secure_url()
+    public function it_can_get_gravatar_secure_url(): void
     {
         $pattern = '/^http(s?):\/\/secure.gravatar.com\/avatar\/[0-9a-z]{32}\?s=80&r=g&d=identicon$/';
 
@@ -179,7 +181,7 @@ class GravatarTest extends TestCase
     }
 
     /** @test */
-    public function it_can_get_gravatar_url_on_empty_email()
+    public function it_can_get_gravatar_url_on_empty_email(): void
     {
         $expected = 'https://secure.gravatar.com/avatar/00000000000000000000000000000000?s=80&r=g&d=identicon&f=y';
 
@@ -188,7 +190,7 @@ class GravatarTest extends TestCase
     }
 
     /** @test */
-    public function it_can_get_gravatar_src_url()
+    public function it_can_get_gravatar_src_url(): void
     {
         $hashed = md5($this->email);
 
@@ -213,7 +215,7 @@ class GravatarTest extends TestCase
     }
 
     /** @test */
-    public function it_can_get_gravatar_image_tag()
+    public function it_can_get_gravatar_image_tag(): void
     {
         $hashed = md5($this->email);
 
@@ -236,7 +238,7 @@ class GravatarTest extends TestCase
     }
 
     /** @test */
-    public function it_can_check_if_email_has_a_gravatar()
+    public function it_can_check_if_email_has_a_gravatar(): void
     {
         static::assertTrue($this->gravatar->exists($this->email));
 
@@ -244,7 +246,7 @@ class GravatarTest extends TestCase
     }
 
     /** @test */
-    public function it_can_set_false_to_default_image()
+    public function it_can_set_false_to_default_image(): void
     {
         $this->gravatar = new Gravatar(false);
 
@@ -255,7 +257,7 @@ class GravatarTest extends TestCase
     }
 
     /** @test */
-    public function it_can_set_size_from_height_or_width_attributes()
+    public function it_can_set_size_from_height_or_width_attributes(): void
     {
         $this->gravatar->image('', null, ['width' => 32]);
 
@@ -275,7 +277,7 @@ class GravatarTest extends TestCase
     }
 
     /** @test */
-    public function it_get_profile()
+    public function it_get_profile(): void
     {
         $data = $this->gravatar->profile('arcanedev.maroc@gmail.com');
 
@@ -285,7 +287,7 @@ class GravatarTest extends TestCase
     }
 
     /** @test */
-    public function it_can_check_if_image_type_is_supported()
+    public function it_can_check_if_image_type_is_supported(): void
     {
         $types = [
             '404',
@@ -306,7 +308,7 @@ class GravatarTest extends TestCase
     }
 
     /** @test */
-    public function it_must_throw_exception_when_default_image_not_supported()
+    public function it_must_throw_exception_when_default_image_not_supported(): void
     {
         $this->expectException(InvalidImageUrlException::class);
         $this->expectExceptionMessage('The default image specified is not a recognized gravatar `default` and is not a valid URL: `github`');
@@ -324,7 +326,7 @@ class GravatarTest extends TestCase
      *
      * @param  \Arcanedev\Gravatar\Contracts\Gravatar  $gravatar
      */
-    public function assertGravatarInstance($gravatar)
+    public function assertGravatarInstance($gravatar): void
     {
         static::assertInstanceOf(\Arcanedev\Gravatar\Gravatar::class, $gravatar);
         static::assertSame('g', $gravatar->getRating());

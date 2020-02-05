@@ -1,4 +1,8 @@
-<?php namespace Arcanedev\Gravatar\Concerns;
+<?php
+
+declare(strict_types=1);
+
+namespace Arcanedev\Gravatar\Concerns;
 
 /**
  * Trait     HashEmail
@@ -20,7 +24,7 @@ trait HashEmail
      *
      * @return string
      */
-    public static function hashEmail($email)
+    public static function hashEmail(string $email): string
     {
         return hash('md5', strtolower(trim($email)));
     }

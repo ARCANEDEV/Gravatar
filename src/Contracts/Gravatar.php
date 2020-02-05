@@ -1,4 +1,8 @@
-<?php namespace Arcanedev\Gravatar\Contracts;
+<?php
+
+declare(strict_types=1);
+
+namespace Arcanedev\Gravatar\Contracts;
 
 /**
  * Interface  Gravatar
@@ -152,5 +156,5 @@ interface Gravatar
      *
      * @return string
      */
-    public static function hashEmail($email);
+    public static function hashEmail(string $email): string;
 }

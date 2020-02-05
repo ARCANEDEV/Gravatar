@@ -1,5 +1,10 @@
-<?php namespace Arcanedev\Gravatar\Tests;
+<?php
 
+declare(strict_types=1);
+
+namespace Arcanedev\Gravatar\Tests;
+
+use Arcanedev\Gravatar\Exceptions\InvalidProfileFormatException;
 use Arcanedev\Gravatar\Profile;
 
 /**
@@ -43,7 +48,7 @@ class ProfileTest extends TestCase
      */
 
     /** @test */
-    public function it_can_set_and_get_format()
+    public function it_can_set_and_get_format(): void
     {
         static::assertNull($this->profile->getFormat());
 
@@ -55,7 +60,7 @@ class ProfileTest extends TestCase
     }
 
     /** @test */
-    public function it_can_get_url()
+    public function it_can_get_url(): void
     {
         static::assertSame(
             'https://www.gravatar.com/00000000000000000000000000000000',
@@ -74,7 +79,7 @@ class ProfileTest extends TestCase
     }
 
     /** @test */
-    public function it_can_switch_to_unsecured_url()
+    public function it_can_switch_to_unsecured_url(): void
     {
         static::assertSame(
             'http://www.gravatar.com/cb8419c1d471d55fbca0d63d1fb2b6ac',
@@ -83,9 +88,9 @@ class ProfileTest extends TestCase
     }
 
     /** @test */
-    public function it_must_throw_an_exception_on_invalid_format()
+    public function it_must_throw_an_exception_on_invalid_format(): void
     {
-        $this->expectException(\Arcanedev\Gravatar\Exceptions\InvalidProfileFormatException::class);
+        $this->expectException(InvalidProfileFormatException::class);
         $this->expectExceptionMessage('The format [csv] is invalid, the supported formats are: json, xml, php, vcf, qr');
 
         $this->profile->setFormat('csv');

@@ -1,5 +1,10 @@
-<?php namespace Arcanedev\Gravatar;
+<?php
 
+declare(strict_types=1);
+
+namespace Arcanedev\Gravatar;
+
+use Arcanedev\Gravatar\Contracts\Gravatar as GravatarContract;
 use Arcanedev\Gravatar\Helpers\NumberChecker;
 use Arcanedev\Html\Elements\Img;
 use Illuminate\Support\Arr;
@@ -10,7 +15,7 @@ use Illuminate\Support\Arr;
  * @package  Arcanedev\Gravatar
  * @author   ARCANEDEV <arcanedev.maroc@gmail.com>
  */
-class Gravatar implements Contracts\Gravatar
+class Gravatar implements GravatarContract
 {
     /* -----------------------------------------------------------------
      |  Traits
@@ -125,7 +130,7 @@ class Gravatar implements Contracts\Gravatar
      *
      * @param  string|false  $image
      *
-     * @return \Arcanedev\Gravatar\Gravatar
+     * @return $this
      *
      * @throws \Arcanedev\Gravatar\Exceptions\InvalidImageUrlException
      */
@@ -157,9 +162,9 @@ class Gravatar implements Contracts\Gravatar
     /**
      * Set the avatar size to use.
      *
-     * @param integer $size - The avatar size to use, must be less than 512 and greater than 0.
+     * @param int $size - The avatar size to use, must be less than 512 and greater than 0.
      *
-     * @return \Arcanedev\Gravatar\Gravatar
+     * @return $this
      *
      * @throws \Arcanedev\Gravatar\Exceptions\InvalidImageSizeException
      */
@@ -189,7 +194,7 @@ class Gravatar implements Contracts\Gravatar
      *
      * @param  string  $rating
      *
-     * @return \Arcanedev\Gravatar\Gravatar
+     * @return $this
      *
      * @throws \Arcanedev\Gravatar\Exceptions\InvalidImageRatingException
      */
@@ -212,7 +217,7 @@ class Gravatar implements Contracts\Gravatar
      *
      * @return bool
      */
-    public function isSecured()
+    public function isSecured(): bool
     {
         return $this->secure;
     }
@@ -231,7 +236,7 @@ class Gravatar implements Contracts\Gravatar
      *
      * @return string
      */
-    public function src($email, $size = null, $rating = null)
+    public function src($email, $size = null, $rating = null): string
     {
         if (is_null($size)) {
             $size = $this->getSize();
@@ -256,7 +261,7 @@ class Gravatar implements Contracts\Gravatar
      *
      * @return string
      */
-    public function get($email, $hash = true)
+    public function get($email, $hash = true): string
     {
         $url  = $this->isSecured() ? static::SECURE_URL : static::BASE_URL;
         $url .= empty($email)
@@ -290,7 +295,7 @@ class Gravatar implements Contracts\Gravatar
 
         return Img::make()
                   ->src($this->src($email, $size, $rating))
-                  ->attributeUnless(is_null($alt), 'alt', $alt)
+                  ->attributeIfNotNull($alt, 'alt', $alt)
                   ->attributes($attributes);
     }
 
@@ -310,7 +315,7 @@ class Gravatar implements Contracts\Gravatar
     /**
      * Enable the use of the secure protocol for image URLs.
      *
-     * @return \Arcanedev\Gravatar\Gravatar
+     * @return $this
      */
     public function enableSecure()
     {
@@ -322,7 +327,7 @@ class Gravatar implements Contracts\Gravatar
     /**
      * Disable the use of the secure protocol for image URLs.
      *
-     * @return \Arcanedev\Gravatar\Gravatar
+     * @return $this
      */
     public function disableSecure()
     {
@@ -338,7 +343,7 @@ class Gravatar implements Contracts\Gravatar
      *
      * @return bool
      */
-    public function exists($email)
+    public function exists($email): bool
     {
         $this->setDefaultImage('404');
 
@@ -390,7 +395,7 @@ class Gravatar implements Contracts\Gravatar
      *
      * @throws \Arcanedev\Gravatar\Exceptions\InvalidImageUrlException
      */
-    private function checkImageUrl(string $image)
+    private function checkImageUrl(string $image): string
     {
         if ( ! filter_var($image, FILTER_VALIDATE_URL)) {
             throw Exceptions\InvalidImageUrlException::make($image);
@@ -404,7 +409,7 @@ class Gravatar implements Contracts\Gravatar
      *
      * @param  int  $size
      */
-    private function checkSize(&$size)
+    private function checkSize(&$size): void
     {
         if ( ! NumberChecker::isIntValue($size)) {
             throw new Exceptions\InvalidImageSizeException(

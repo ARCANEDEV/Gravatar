@@ -1,4 +1,8 @@
-<?php namespace Arcanedev\Gravatar\Exceptions;
+<?php
+
+declare(strict_types=1);
+
+namespace Arcanedev\Gravatar\Exceptions;
 
 use InvalidArgumentException;
 
@@ -10,7 +14,17 @@ use InvalidArgumentException;
  */
 class InvalidImageUrlException extends InvalidArgumentException
 {
-    public static function make($image)
+    /* -----------------------------------------------------------------
+     |  Main Methods
+     | -----------------------------------------------------------------
+     */
+
+    /**
+     * @param  string  $image
+     *
+     * @return static
+     */
+    public static function make(string $image)
     {
         return new static(
             "The default image specified is not a recognized gravatar `default` and is not a valid URL: `{$image}`"
