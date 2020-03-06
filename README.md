@@ -1,4 +1,4 @@
-# Gravatar [![Packagist License][badge_license]](LICENSE.md) [![For PHP][badge_php]][link-github-repo] [![Laravel 5 Supported][badge_laravel]][link-github-repo]
+# Gravatar [![Packagist License][badge_license]](LICENSE.md) [![For PHP][badge_php]][link-github-repo] [![Laravel Supported][badge_laravel]][link-github-repo]
 
 [![Github Workflow Status][badge_build]][link-github-status]
 [![Coverage Status][badge_coverage]][link-scrutinizer]
@@ -39,17 +39,17 @@ Any ideas are welcome. Feel free to submit any issues or pull requests, please c
 - [ARCANEDEV][link-author]
 - [All Contributors][link-contributors]
 
-[badge_license]:      http://img.shields.io/packagist/l/arcanedev/gravatar.svg?style=flat-square
-[badge_php]:          https://img.shields.io/badge/PHP-Framework%20agnostic-4F5B93.svg?style=flat-square
+[badge_license]:   http://img.shields.io/packagist/l/arcanedev/gravatar.svg?style=flat-square
+[badge_php]:       https://img.shields.io/badge/PHP-Framework%20agnostic-4F5B93.svg?style=flat-square
 [badge_build]:     https://img.shields.io/github/workflow/status/ARCANEDEV/Gravatar/run-tests?style=flat-square
-[badge_coverage]:     https://img.shields.io/scrutinizer/coverage/g/ARCANEDEV/Gravatar.svg?style=flat-square
-[badge_quality]:      https://img.shields.io/scrutinizer/g/ARCANEDEV/Gravatar.svg?style=flat-square
-[badge_insight]:      https://img.shields.io/sensiolabs/i/b295ae87-bc10-4a43-9ca4-fbeab5c7fcda.svg?style=flat-square
-[badge_issues]:       http://img.shields.io/github/issues/ARCANEDEV/Gravatar.svg?style=flat-square
-[badge_package]:      https://img.shields.io/badge/package-arcanedev/gravatar-blue.svg?style=flat-square
-[badge_laravel]:      https://img.shields.io/badge/Laravel%20Supported-5.x%20|%206.x-orange.svg?style=flat-square
-[badge_release]:      https://img.shields.io/packagist/v/arcanedev/gravatar.svg?style=flat-square
-[badge_downloads]:    https://img.shields.io/packagist/dt/arcanedev/gravatar.svg?style=flat-square
+[badge_coverage]:  https://img.shields.io/scrutinizer/coverage/g/ARCANEDEV/Gravatar.svg?style=flat-square
+[badge_quality]:   https://img.shields.io/scrutinizer/g/ARCANEDEV/Gravatar.svg?style=flat-square
+[badge_insight]:   https://img.shields.io/sensiolabs/i/b295ae87-bc10-4a43-9ca4-fbeab5c7fcda.svg?style=flat-square
+[badge_issues]:    http://img.shields.io/github/issues/ARCANEDEV/Gravatar.svg?style=flat-square
+[badge_package]:   https://img.shields.io/badge/package-arcanedev/gravatar-blue.svg?style=flat-square
+[badge_laravel]:   https://img.shields.io/badge/Laravel%20Supported-5.x%20|%206.x-orange.svg?style=flat-square
+[badge_release]:   https://img.shields.io/packagist/v/arcanedev/gravatar.svg?style=flat-square
+[badge_downloads]: https://img.shields.io/packagist/dt/arcanedev/gravatar.svg?style=flat-square
 
 [link-author]:        https://github.com/arcanedev-maroc
 [link-github-repo]:   https://github.com/ARCANEDEV/Gravatar
