@@ -16,14 +16,13 @@
     "type":    "library",
     "license": "MIT",
     "require": {
-        "php" :               ">=7.2.0",
+        "php" :               "^7.2.0",
         "ext-curl":           "*",
         "arcanedev/support":  "^5.1",
         "arcanedev/php-html": "^3.0"
     },
     "require-dev": {
         "orchestra/testbench": "^4.0",
-        "phpunit/phpcov":      "^6.0",
         "phpunit/phpunit":     "^8.0"
     },
     "autoload": {
@@ -43,5 +42,7 @@
                 "Arcanedev\\Gravatar\\GravatarServiceProvider"
             ]
         }
-    }
+    },
+    "minimum-stability": "dev",
+    "prefer-stable": true
 }
