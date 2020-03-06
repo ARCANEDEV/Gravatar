@@ -16,14 +16,14 @@
     "type":    "library",
     "license": "MIT",
     "require": {
-        "php" :               "^7.2.0",
+        "php" :               "^7.2.5",
         "ext-curl":           "*",
-        "arcanedev/support":  "^5.1",
-        "arcanedev/php-html": "^3.0"
+        "arcanedev/support":  "^7.0",
+        "arcanedev/php-html": "^4.0"
     },
     "require-dev": {
-        "orchestra/testbench": "^4.0",
-        "phpunit/phpunit":     "^8.0"
+        "orchestra/testbench": "^5.0",
+        "phpunit/phpunit":     "^8.5|^9.5"
     },
     "autoload": {
         "psr-4": {
