@@ -8,8 +8,7 @@ if ( ! function_exists('gravatar')) {
      *
      * @return Arcanedev\Gravatar\Contracts\Gravatar
      */
-    function gravatar(): Gravatar
-    {
+    function gravatar(): Gravatar {
         return app(Gravatar::class);
     }
 }

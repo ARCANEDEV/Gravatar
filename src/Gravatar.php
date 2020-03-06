@@ -102,7 +102,7 @@ class Gravatar implements GravatarContract
      * @param  int     $size
      * @param  string  $rating
      */
-    public function __construct($default = 'blank', $size = 80, $rating = 'g')
+    public function __construct($default = 'identicon', $size = 80, $rating = 'g')
     {
         $this->setDefaultImage($default);
         $this->setSize($size);
@@ -162,7 +162,7 @@ class Gravatar implements GravatarContract
     /**
      * Set the avatar size to use.
      *
-     * @param int $size - The avatar size to use, must be less than 512 and greater than 0.
+     * @param  int  $size - The avatar size to use, must be less than 512 and greater than 0.
      *
      * @return $this
      *

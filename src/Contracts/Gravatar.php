@@ -29,7 +29,7 @@ interface Gravatar
      *
      * @param  string|false  $image
      *
-     * @return self
+     * @return $this
      *
      * @throws \Arcanedev\Gravatar\Exceptions\InvalidImageUrlException
      */
@@ -45,9 +45,9 @@ interface Gravatar
     /**
      * Set the avatar size to use.
      *
-     * @param integer $size - The avatar size to use, must be less than 512 and greater than 0.
+     * @param  int  $size - The avatar size to use, must be less than 512 and greater than 0.
      *
-     * @return self
+     * @return $this
      *
      * @throws \Arcanedev\Gravatar\Exceptions\InvalidImageSizeException
      */
@@ -65,7 +65,7 @@ interface Gravatar
      *
      * @param  string  $rating
      *
-     * @return self
+     * @return $this
      *
      * @throws \Arcanedev\Gravatar\Exceptions\InvalidImageRatingException
      */
@@ -129,14 +129,14 @@ interface Gravatar
     /**
      * Enable the use of the secure protocol for image URLs.
      *
-     * @return self
+     * @return $this
      */
     public function enableSecure();
 
     /**
      * Disable the use of the secure protocol for image URLs.
      *
-     * @return self
+     * @return $this
      */
     public function disableSecure();
 

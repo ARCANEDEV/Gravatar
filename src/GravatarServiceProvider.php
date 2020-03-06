@@ -4,6 +4,7 @@ declare(strict_types=1);
 
 namespace Arcanedev\Gravatar;
 
+use Arcanedev\Gravatar\Contracts\Gravatar as GravatarContract;
 use Arcanedev\Support\Providers\PackageServiceProvider;
 use Illuminate\Contracts\Support\DeferrableProvider;
 
@@ -41,11 +42,14 @@ class GravatarServiceProvider extends PackageServiceProvider implements Deferrab
 
         $this->registerConfig();
 
-        $this->singleton(Contracts\Gravatar::class, function($app) {
+        $this->singleton(GravatarContract::class, function($app) {
+            /** @var  \Illuminate\Contracts\Config\Repository  $config */
+            $config = $app['config'];
+
             return new Gravatar(
-                $app['config']->get('gravatar.default', 'mm'),
-                $app['config']->get('gravatar.size', 80),
-                $app['config']->get('gravatar.max-rating', 'g')
+                $config->get('gravatar.default', 'identicon'),
+                $config->get('gravatar.size', 80),
+                $config->get('gravatar.max-rating', 'g')
             );
         });
     }
@@ -55,7 +59,9 @@ class GravatarServiceProvider extends PackageServiceProvider implements Deferrab
      */
     public function boot(): void
     {
-        $this->publishConfig();
+        if ($this->app->runningInConsole()) {
+            $this->publishConfig();
+        }
     }
 
     /**
@@ -66,7 +72,7 @@ class GravatarServiceProvider extends PackageServiceProvider implements Deferrab
     public function provides(): array
     {
         return [
-            Contracts\Gravatar::class,
+            GravatarContract::class,
         ];
     }
 }
