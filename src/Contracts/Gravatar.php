@@ -7,7 +7,6 @@ namespace Arcanedev\Gravatar\Contracts;
 /**
  * Interface  Gravatar
  *
- * @package   Arcanedev\Gravatar\Contracts
  * @author    ARCANEDEV <arcanedev.maroc@gmail.com>
  */
 interface Gravatar

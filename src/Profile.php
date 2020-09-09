@@ -9,7 +9,6 @@ use Arcanedev\Gravatar\Exceptions\InvalidProfileFormatException;
 /**
  * Class     Profile
  *
- * @package  Arcanedev\Gravatar
  * @author   ARCANEDEV <arcanedev.maroc@gmail.com>
  */
 class Profile

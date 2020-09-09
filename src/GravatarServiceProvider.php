@@ -11,7 +11,6 @@ use Illuminate\Contracts\Support\DeferrableProvider;
 /**
  * Class     GravatarServiceProvider
  *
- * @package  Arcanedev\Gravatar
  * @author   ARCANEDEV <arcanedev.maroc@gmail.com>
  */
 class GravatarServiceProvider extends PackageServiceProvider implements DeferrableProvider

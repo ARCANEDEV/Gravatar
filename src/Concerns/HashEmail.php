@@ -7,7 +7,6 @@ namespace Arcanedev\Gravatar\Concerns;
 /**
  * Trait     HashEmail
  *
- * @package  Arcanedev\Gravatar\Concerns
  * @author   ARCANEDEV <arcanedev.maroc@gmail.com>
  */
 trait HashEmail

@@ -12,7 +12,6 @@ use Illuminate\Support\Arr;
 /**
  * Class     Gravatar
  *
- * @package  Arcanedev\Gravatar
  * @author   ARCANEDEV <arcanedev.maroc@gmail.com>
  */
 class Gravatar implements GravatarContract
