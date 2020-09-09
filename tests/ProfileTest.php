@@ -10,7 +10,6 @@ use Arcanedev\Gravatar\Profile;
 /**
  * Class     ProfileTest
  *
- * @package  Arcanedev\Gravatar\Tests
  * @author   ARCANEDEV <arcanedev.maroc@gmail.com>
  */
 class ProfileTest extends TestCase

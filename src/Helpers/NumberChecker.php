@@ -7,7 +7,6 @@ namespace Arcanedev\Gravatar\Helpers;
 /**
  * Class     NumberChecker
  *
- * @package  Arcanedev\Gravatar\Helpers
  * @author   ARCANEDEV <arcanedev.maroc@gmail.com>
  */
 class NumberChecker

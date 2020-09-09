@@ -9,7 +9,6 @@ use Arcanedev\Gravatar\GravatarServiceProvider;
 /**
  * Class     GravatarServiceProviderTest
  *
- * @package  Arcanedev\Gravatar\Tests
  * @author   ARCANEDEV <arcanedev.maroc@gmail.com>
  */
 class GravatarServiceProviderTest extends TestCase

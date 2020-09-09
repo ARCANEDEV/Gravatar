@@ -19,7 +19,7 @@ Feel free to check out the [releases](https://github.com/ARCANEDEV/Gravatar/rele
 ### Features
 
   * Framework-agnostic package.
-  * Laravel `5.x | 6.x | 7.x` are Supported.
+  * Laravel `5.x` to `8.x` are Supported.
   * Easy setup & configuration.
   * Well tested (100% code coverage with maximum code quality).
   * Made with :heart: &amp; :coffee:.
@@ -47,7 +47,7 @@ Any ideas are welcome. Feel free to submit any issues or pull requests, please c
 [badge_insight]:   https://img.shields.io/sensiolabs/i/b295ae87-bc10-4a43-9ca4-fbeab5c7fcda.svg?style=flat-square
 [badge_issues]:    http://img.shields.io/github/issues/ARCANEDEV/Gravatar.svg?style=flat-square
 [badge_package]:   https://img.shields.io/badge/package-arcanedev/gravatar-blue.svg?style=flat-square
-[badge_laravel]:   https://img.shields.io/badge/Laravel%20Supported-5.x%20to%207.x-orange.svg?style=flat-square
+[badge_laravel]:   https://img.shields.io/badge/Laravel%20Supported-5.x%20to%208.x-orange.svg?style=flat-square
 [badge_release]:   https://img.shields.io/packagist/v/arcanedev/gravatar.svg?style=flat-square
 [badge_downloads]: https://img.shields.io/packagist/dt/arcanedev/gravatar.svg?style=flat-square
 

@@ -1,14 +1,17 @@
-<?php namespace Arcanedev\Gravatar\Tests;
+<?php
 
-use Arcanedev\Gravatar\Exceptions\InvalidImageRatingException;
-use Arcanedev\Gravatar\Exceptions\InvalidImageSizeException;
-use Arcanedev\Gravatar\Exceptions\InvalidImageUrlException;
+declare(strict_types=1);
+
+namespace Arcanedev\Gravatar\Tests;
+
+use Arcanedev\Gravatar\Exceptions\{
+    InvalidImageRatingException, InvalidImageSizeException, InvalidImageUrlException
+};
 use Arcanedev\Gravatar\Gravatar;
 
 /**
  * Class     GravatarTest
  *
- * @package  Arcanedev\Gravatar\Tests
  * @author   ARCANEDEV <arcanedev.maroc@gmail.com>
  */
 class GravatarTest extends TestCase

@@ -4,13 +4,14 @@ declare(strict_types=1);
 
 namespace Arcanedev\Gravatar\Exceptions;
 
+use InvalidArgumentException;
+
 /**
  * Class     InvalidProfileFormatException
  *
- * @package  Arcanedev\Gravatar\Exceptions
  * @author   ARCANEDEV <arcanedev.maroc@gmail.com>
  */
-class InvalidProfileFormatException extends \InvalidArgumentException
+class InvalidProfileFormatException extends InvalidArgumentException
 {
     /* -----------------------------------------------------------------
      |  Main Methods
