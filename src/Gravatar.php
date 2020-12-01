@@ -346,7 +346,7 @@ class Gravatar implements GravatarContract
     {
         $this->setDefaultImage('404');
 
-        $headers = get_headers($this->get($email), 1);
+        $headers = get_headers($this->get($email));
 
         return strpos($headers[0], '200') ? true : false;
     }
